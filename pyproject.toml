@@ -1,0 +1,96 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "protocol_qc"
+description = "Protocol quality control tool for MRI data"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Aaron Capon", email = "aaron.capon@florey.edu.au"}
+]
+maintainers = [
+    {name = "Aaron Capon", email = "aaron.capon@florey.edu.au"}
+]
+license = {file = "COPYING"}
+classifiers = [
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.10",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+  "pydicom==2.4.2",
+  "rich_argparse==1.5.2",
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {attr = "protocol_qc.__version__"}
+
+[project.optional-dependencies]
+dev = [
+    "black==24.8.0",
+    "isort==5.13.2",
+    "mypy==1.11.1",
+    "pylint==2.16.2",
+    "pre-commit==3.3.3",
+]
+
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+]
+
+[project.urls]
+source = "https://github.com/Australian-Epilepsy-Project/protocol_qc"
+tracker = "https://github.com/Australian-Epilepsy-Project/protocol_qc/issues"
+
+[project.scripts]
+"protocol_qc" = "protocol_qc.cli:cli"
+
+[tool.pylint.messages_control]
+disable = """
+    logging-fstring-interpolation,
+    wrong-import-position,
+    too-many-instance-attributes,
+    too-many-branches,
+    too-many-statements,
+    too-many-arguments,
+    too-many-locals,
+    too-many-branches,
+    too-many-nested-blocks,
+
+"""
+
+[tool.pylint.SIMILARITIES]
+min-similarity-lines = 6
+ignore-comments = true
+ignore-docstrings = true
+
+[tool.pylint.MASTER]
+ignore = "_version.py"
+
+[tool.mypy]
+ignore_missing_imports = true
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+no_implicit_optional = true
+no_implicit_reexport = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+exclude = [
+    "tests"
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--cov-report term-missing --cov=protocol_qc"
+testpaths = [
+    "tests"
+]

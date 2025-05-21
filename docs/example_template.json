@@ -1,0 +1,407 @@
+{
+  "GENERAL": {
+    "date_restriction": {
+      "start": "1970-01-01",
+      "end": "2023-01-19"
+    },
+    "fields": {
+      "InstituteName": {
+        "value": "Scans R Us",
+        "comparison": "regex"
+      }
+    },
+    "tags": {
+      "protocol_version": {
+      "type": "constant",
+      "tag": "v42"
+      },
+      "scanner_type": {
+        "type": "constant",
+        "tag": "Apeture Science"
+      },
+      "scanner_software": {
+        "type": "fill_with",
+        "tag": "SoftwareVersions"
+      },
+      "site": {
+        "type": "options",
+        "tag": {
+          "Earth": {
+            "field": "InstitutionName",
+            "value": "Earth Base",
+            "comparison": "exact"
+          },
+          "Mars": {
+            "field": "InstitutionName",
+            "value": ["Mars", "The Red Institute"],
+            "comparison": "in_set"
+          },
+          "Pluto": {
+            "field": "InstitutionName",
+            "value": "Pluto MRI Services",
+            "comparison": "regex"
+          }
+        }
+      }
+    }
+  },
+  "T1w": {
+    "duplicates_allowed": false,
+    "fields": {
+      "SeriesDescription": {
+        "value": "t1w",
+        "comparison": "regex"
+      },
+      "SequenceName": {
+        "value": "*ppl3d1_42ns",
+        "comparison": "exact"
+      },
+      "ScanOptions": {
+        "value": [
+          "IR",
+          "WE"
+        ],
+        "comparison": "exact"
+      },
+      "Rows": {
+        "value": 256,
+        "comparison": "exact"
+      },
+      "Columns": {
+        "value": 256,
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "mag": {
+        "num_files": 192,
+        "share_fields": false,
+        "fields": {
+          "ImageType": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "M",
+              "ND"
+            ],
+            "comparison": "exact"
+          }
+        }
+      },
+      "mag_prenorm": {
+        "num_files": 192,
+        "fields": {
+          "ImageType": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "M",
+              "ND",
+              "NORM"
+            ],
+            "comparison": "exact"
+          }
+        }
+      }
+    }
+  },
+  "DWI_AP": {
+    "duplicates_allowed": false,
+    "fields": {
+      "SeriesDescription": {
+        "value": "DWI_Ax_AP_52Dir",
+        "comparison": "regex"
+      }
+    },
+    "series": {
+      "SBref": {
+        "num_files": 2,
+        "fields": {
+          "ImageComments": {
+            "value": "Single-band reference SENSE1+",
+            "comparison": "exact"
+          },
+          "ScanningSequence": {
+            "value": "EP",
+            "comparison": "exact"
+          }
+        }
+      },
+      "mag_prenorm": {
+        "num_files": 42,
+        "fields": {
+          "Rows": {
+            "value": 1280,
+            "comparison": "exact"
+          },
+          "Columns": {
+            "value": 1280,
+            "comparison": "exact"
+          },
+          "NumberOfImagesInMosaic": {
+            "value": 84,
+            "comparison": "exact"
+          }
+      },
+      "phase": {
+        "num_files": 42,
+        "fields": {
+          "Rows": {
+            "value": 1280,
+            "comparison": "exact"
+          },
+          "Columns": {
+            "value": 1280,
+            "comparison": "exact"
+          },
+          "NumberOfImagesInMosaic": {
+            "value": 84,
+            "comparison": "exact"
+          },
+      },
+      "PhysioLog": {
+        "num_files": 1,
+        "share_fields": false,
+        "fields": {
+          "ImageType": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "RAWDATA",
+              "PHYSIO"
+            ],
+            "comparison": "exact"
+          }
+        }
+      }
+    }
+  },
+  "fMRI_Pseudoword": {
+    "duplicates_allowed": false,
+    "paired_fmaps": {
+      "which_acquisitions": [
+        "FMaps",
+        "FMaps_InvROPE"
+      ],
+      "position": "after"
+    },
+    "fields": {
+      "SeriesDescription": {
+        "value": "Pseudoword",
+        "comparison": "regex"
+      },
+      "SequenceName": {
+        "value": "lpfid223_42",
+        "comparison": "exact"
+      },
+      "Rows": {
+        "value": 80,
+        "comparison": "exact"
+      },
+      "Columns": {
+        "value": 72,
+        "comparison": "exact"
+      },
+    },
+    "series": {
+      "SBref_mag": {
+        "num_files": 3,
+        "fields": {
+          "ImageType": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "FMRI",
+              "NONE"
+            ],
+            "comparison": "exact"
+          },
+          "ImageComments": {
+              "value": "Single-band reference SENSE1+",
+              "comparison": "regex"
+          }
+        }
+      },
+      "SBref_phase": {
+        "num_files": 3,
+        "fields": {
+          "ComplexImageComponent": {
+            "value": "PHASE",
+            "comparison": "exact"
+          },
+          "ImageType": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "FMRI",
+              "NONE"
+            ],
+            "comparison": "exact"
+          },
+          "ImageComments": {
+              "value": "Single-band reference SENSE1+",
+              "comparison": "regex"
+          }
+        }
+      },
+      "mag": {
+        "num_files": 42,
+        "fields": {
+          "ImageTypeText": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "M",
+              "MB",
+              "TE",
+              "ND"
+            ],
+            "comparison": "regex"
+          }
+        }
+      },
+      "phase": {
+        "num_files": 42,
+        "fields": {
+          "ImageTypeText": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "P",
+              "MB",
+              "TE",
+              "ND"
+            ],
+            "comparison": "regex"
+          }
+        }
+      },
+      "PhysioLog": {
+        "num_files": 1,
+        "share_fields": false,
+        "fields": {
+          "SeriesDescription": {
+            "value": "Pseudoword.*PhysioLog",
+            "comparison": "regex"
+          }
+        }
+      }
+    }
+  },
+  "FMaps": {
+    "duplicates_expected": 3,
+    "ignore_ordering": true,
+    "fields": {
+      "SeriesDescription": {
+        "value": "FMap_AxObl_AP-",
+        "comparison": "regex"
+      },
+      "Rows": {
+        "value": 112,
+        "comparison": "exact"
+      },
+      "Columns": {
+        "value": 112,
+        "comparison": "exact"
+      },
+      "SequenceName": {
+        "value": "asdasd23_42",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "PhysioLog": {
+        "num_files": 1,
+        "share_fields": false,
+        "fields": {
+          "SeriesDescription": {
+            "value": "FMap_AxObl_AP-",
+            "comparison": "regex"
+          },
+          "ImageType": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "OTHER",
+              "NONE"
+            ],
+            "comparison": "exact"
+          }
+        }
+      },
+      "mag": {
+        "num_files": 1,
+        "fields": {
+          "ImageTypeText": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "M",
+              "ND",
+              "NORM"
+            ],
+            "comparison": "exact"
+          }
+        }
+      }
+    }
+  },
+  "FMaps_InvROPE": {
+    "duplicates_expected": 3,
+    "ignore_ordering": true,
+    "fields": {
+      "SeriesDescription": {
+        "value": "FMap_AxObl_AP_InvROPE(|-)",
+        "comparison": "regex"
+      },
+      "Rows": {
+        "value": 112,
+        "comparison": "exact"
+      },
+      "Columns": {
+        "value": 112,
+        "comparison": "exact"
+      },
+      "SequenceName": {
+        "value": "asdasd23_42",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "PhysioLog": {
+        "num_files": 1,
+        "share_fields": false,
+        "fields": {
+          "SeriesDescription": {
+            "value": "FMap_AxObl_AP_InvROPE(|-)_PhysioLog",
+            "comparison": "regex"
+          },
+          "ImageType": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "OTHER",
+              "NONE"
+            ],
+            "comparison": "exact"
+          }
+        }
+      },
+      "mag": {
+        "num_files": 1,
+        "fields": {
+          "ImageTypeText": {
+            "value": [
+              "ORIGINAL",
+              "PRIMARY",
+              "M",
+              "ND",
+              "NORM"
+            ],
+            "comparison": "exact"
+          }
+        }
+      }
+    }
+  }
+}
