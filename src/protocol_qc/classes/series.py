@@ -397,7 +397,20 @@ class TemplateSeries:
         # Check software version of scanner and set private fields accordingly
         private_fields: dict[str, tuple[int, int]]
         sop_class_uid: str = data["SOPClassUID"].repval
-        if sop_class_uid == "Enhanced MR Image Storage":
+        try:
+            if (
+                data["ConversionSourceAttributesSequence"][0][
+                    "ReferencedSOPClassUID"
+                ].repval
+                == "Enhanced MR Image Storage"
+            ):
+                was_enhanced: bool = True
+            else:
+                was_enhanced = False
+        except KeyError:
+            was_enhanced = False
+
+        if sop_class_uid == "Enhanced MR Image Storage" or was_enhanced:
             private_fields = {
                 "GradientMode": (0x0021, 0x1008),
                 "ParallelImagingAcceleration": (0x0021, 0x1009),
