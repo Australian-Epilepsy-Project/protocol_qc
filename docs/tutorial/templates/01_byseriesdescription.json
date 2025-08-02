@@ -1,0 +1,322 @@
+{
+  "Localizer": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "localizer",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "Dual echo gradient echo field map": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "gre_field_mapping",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "PhaseDiff": {
+      }
+    }
+  },
+  "T1-weighted FLASH": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "t1_fl2d_sag",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "T2-weighted Turbo Spin Echo": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "t2_tse_tra_p2",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "MP2RAGE": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "^t1_mp2rage.*",
+        "comparison": "regex"
+      }
+    },
+    "series": {
+      "First inversion": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_INV1$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Second inversion": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_INV2$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "T1 map": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_T1_Images$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "First simulated inversion time": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_T1_Images_SIM-TI410ms$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Second simulated inversion time": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_T1_Images_SIM-TI1100ms$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Uniform intensity image": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_UNI_Images$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Denoised uniform intensity image": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_UNI\\-DEN$",
+            "comparison": "regex"
+          }
+        }
+      }
+    }
+  },
+  "T2*-weighted multi-echo gradient echo": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "^t2s_megre.*",
+        "comparison": "regex"
+      }
+    },
+    "series": {
+      "Images": {
+        "fields": {
+          "SeriesDescription": {
+            "value": "t2s_megre",
+            "comparison": "exact"
+          }
+        }
+      },
+      "R2* map": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_R2Star_Images$",
+            "comparison": "regex"
+          }
+        }
+      }
+    }
+  },
+  "Spin-echo EPI (product); A>>P": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "ep2d_se_ap",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "Spin-echo EPI (product); P>>A": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "ep2d_se_pa",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "Task-based fMRI BOLD": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "ep2d_fid_basic_bold_p2_task",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "Resting-state fMRI BOLD": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "ep2d_fid_basic_bold_p2_rest",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "Spin-echo EPI (CMRR); A>>P": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "cmrr_ep2d_se_ap",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "Spin-echo EPI (CMRR); A>>P Inv-RO-PE": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "cmrr_ep2d_se_apinvrope",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Image": {
+      }
+    }
+  },
+  "Diffusion MRI": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "^cmrr_mbep2d_diff.*",
+        "comparison": "regex"
+      }
+    },
+    "series": {
+      "DWI": {
+        "fields": {
+          "SeriesDescription": {
+            "value": "cmrr_mbep2d_diff",
+            "comparison": "exact"
+          }
+        }
+      },
+      "ADC": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_ADC$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Trace-weighted": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_TRACEW$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Fractional Anisotropy": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_FA$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Directionally-Encoded Colour FA": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_ColFA$",
+            "comparison": "regex"
+          }
+        }
+      },
+      "Diffusion Tensor fit": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_TENSOR$",
+            "comparison": "regex"
+          }
+        }
+      }
+    }
+  },
+  "Pulsed Arterial Spin Labelling": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "^pasl_3d_tra.*",
+        "comparison": "regex"
+      }
+    },
+    "series": {
+      "Images": {
+        "fields": {
+          "SeriesDescription": {
+            "value": "pasl_3d_tra",
+            "comparison": "exact"
+          }
+        }
+      },
+      "Perfusion-weighted": {
+        "fields": {
+          "SeriesDescription": {
+            "value": ".*_Perfusion_Weighted$",
+            "comparison": "regex"
+          }
+        }
+      }
+    }
+  },
+  "Spectroscopy": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "csi_slaser",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Data": {
+      }
+    }
+  },
+  "Phoenix Report": {
+    "fields": {
+      "SeriesDescription": {
+        "value": "PhoenixZIPReport",
+        "comparison": "exact"
+      }
+    },
+    "series": {
+      "Data": {
+      }
+    }
+  }
+}

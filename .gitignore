@@ -90,3 +90,6 @@ tags
 
 .tags
 .ctags
+
+# Running tutorial, which involves a DataLad clone
+docs/tutorial/data
