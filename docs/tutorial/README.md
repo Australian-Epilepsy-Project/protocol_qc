@@ -11,9 +11,8 @@ The purpose of this tutorial is to demonstrate:
 
 This tutorial is spread across multiple markdown files:
 
--   [`00_datalad.md`](00_datalad.md):
-    Introduces the DataLad software,
-    and provides instructions on how to access the tutorial data.
+-   [`00_submodule.md`](00_submodule.md):
+    Provides instructions on how to access the tutorial data.
 
 -   [`01_firsttemplate.md`](01_firsttemplate.md):
     Demonstrates how to build from scratch

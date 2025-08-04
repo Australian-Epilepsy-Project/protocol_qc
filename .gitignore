@@ -91,5 +91,5 @@ tags
 .tags
 .ctags
 
-# Running tutorial, which involves a DataLad clone
-docs/tutorial/data
+# Running tutorial, which involves exporting of log files
+docs/tutorial/logs
