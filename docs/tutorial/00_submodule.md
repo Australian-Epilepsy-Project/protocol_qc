@@ -63,9 +63,50 @@ To see the full filesystem tree of the template session:
 tree data/Template/
 ```
 
+```
+01_localizer
+02_gre_field_mapping
+03_t1_fl2d_sag
+04_t2_tse_tra_p2
+05_t1_mp2rage_INV1
+06_t1_mp2rage_INV2
+07_t1_mp2rage_T1_Images
+08_t1_mp2rage_T1_Images_SIM-TI410ms
+09_t1_mp2rage_T1_Images_SIM-TI1100ms
+10_t1_mp2rage_UNI_Images
+11_t1_mp2rage_UNI-DEN
+12_t2s_megre
+13_t2s_megre
+14_t2s_megre
+15_t2s_megre_R2Star_Images
+16_ep2d_se_ap
+17_ep2d_se_pa
+18_ep2d_fid_basic_bold_p2_task
+19_ep2d_se_ap
+20_ep2d_se_pa
+21_ep2d_fid_basic_bold_p2_rest
+22_cmrr_ep2d_se_ap
+23_cmrr_ep2d_se_apinvrope
+24_cmrr_mbep2d_diff
+25_cmrr_mbep2d_diff
+26_cmrr_mbep2d_diff_ADC
+27_cmrr_mbep2d_diff_TRACEW
+28_cmrr_mbep2d_diff_FA
+29_cmrr_mbep2d_diff_ColFA
+30_cmrr_mbep2d_diff_TENSOR
+31_pasl_3d_tra
+32_pasl_3d_tra_Perfusion_Weighted
+33_csi_slaser
+34_Phoenix Document_PhoenixZIPReport
+protocol.pdf
+```
+
 Comparing this filesystem listing
-to the first page of the corresponding PDF document `data/Template/protocol.pdf`,
-it is hopefully clear that there is not perfect correspondence.
+to the first page of the corresponding PDF document `data/Template/protocol.pdf`:
+
+![First page of template PDF printout](images/00_01_TemplatePDF.png)
+
+, it is hopefully clear that there is not perfect correspondence.
 This is because for many MRI sequences,
 a single execution of the sequence can yield multiple DICOM image series;
 this could be magnitude and phase components of a complex image,

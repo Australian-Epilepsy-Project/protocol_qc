@@ -26,6 +26,7 @@ At the head of new protocol template [`templates/03_checkparams.md`](templates/0
 the following was added:
 
 ```json
+{
   "GENERAL": {
     "fields": {
       "BodyPartExamined": {

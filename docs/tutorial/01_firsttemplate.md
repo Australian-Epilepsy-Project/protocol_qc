@@ -40,6 +40,8 @@ To demonstrate this distinction,
 consider the difference between the template protocol as printed by the scanner console,
 and the set of DICOM series reconstructed from that protocol:
 
+![First page of template protocol PDF printout](images/00_01_TemplatePDF.png)
+
 (Note: Reproducing this command call requires installation of the `Xpdf` package)
 
 ```sh
@@ -276,7 +278,7 @@ INFO ---------------------------------------------------------------------------
 These residual mismatches cannot be resolved
 through exclusively use of field `SeriesDescription`;
 further, there are good reasons why `SeriesDescription`
-should *not* be used as the exclusive---or even primary--mechansim
+should *not* be used as the exclusive---or even primary--mechanism
 of determining correspondence between an input dataset and the protocol template.
 Read on to document [`02_seriesdescription.md`](02_seriesdescription.md)
 to see the suggested revisions to this template.

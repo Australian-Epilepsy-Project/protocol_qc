@@ -89,7 +89,10 @@ yet if ProtocolQC were to be instructed to match based on this field,
 doing so would result in arguably erroneous reporting
 that the received data completely violated the planned acquisition protocol.
 
-Consider for instance session `Template_renaming`:
+Consider for instance session `Template_renaming`.
+
+Here is the difference in the first page of the protocol PRF readouts
+between session `Template/` and `Template_renaming/`:
 
 (Note: Reproducing this command call requires installation of the `xpdf` package)
 
@@ -149,6 +152,8 @@ Pulsed ASL
 Spectroscopy
 ```
 
+![First page of template protocol PDF printout](images/00_01_TemplatePDF.png) ![First page of protocol with renamed sequences](images/02_01_TemplateRenamingPDF.png)
+
 For this session,
 the *only* thing that was changed
 was the names of the sequences on the scanner console.
@@ -195,7 +200,9 @@ Here is the corresponding section of the original template
 ([`templates/01_byseriesdescription.json`](templates/01_byseriesdescription.json)):
 
 ```json
-"T2*-weighted multi-echo gradient echo": {
+  ...
+  },
+  "T2*-weighted multi-echo gradient echo": {
     "fields": {
       "SeriesDescription": {
         "value": "^t2s_megre.*",
@@ -221,12 +228,15 @@ Here is the corresponding section of the original template
       }
     }
   },
+  ...
 ```
 
 And here is the corresponding section of the revised protocol
 [`templates/02_bymetadata.json`](templates/02_bymetadata.json):
 
 ```json
+  ...
+  },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
       "Modality": {
@@ -314,6 +324,7 @@ And here is the corresponding section of the revised protocol
       }
     }
   },
+  ...
 ```
 
 -   Matching of the *acquisition* to the template is no longer done using `SeriesDescription`,
