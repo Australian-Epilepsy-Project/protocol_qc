@@ -136,7 +136,7 @@ or have the permissions necessary to run the commands below using `sudo`.
 To build the image locally, run from the repository root directory:
 
 ```ShellSession
-docker build . -t australian-epilepsy-project/protocol_qc:<TAG>
+docker build . -t aepflorey/protocol_qc:<TAG>
 ```
 
 (replace "`<TAG>`" with the specific version of the software checked out,
@@ -145,7 +145,7 @@ or simply use the default `docker` tag of "`latest`")
 Alternatively pull the image from DockerHub:
 
 ```ShellSession
-docker pull australian-epilepsy-project/protocol_qc:<TAG>
+docker pull aepflorey/protocol_qc:<TAG>
 ```
 
 To run the container requires explicit *binding* of those paths on the host system
@@ -166,7 +166,7 @@ docker run \
     -v $(pwd)/DICOM:/input \
     -v $(pwd)/templates:/templates \
     -v ${pwd}/logs:/output \
-    australian-epilepsy-project/protocol_qc:latest \
+    aepflorey/protocol_qc:latest \
     /templates \
     /input \
     --logs_dir /output
@@ -185,9 +185,9 @@ To build an Apptainer image from the `docker` image
 
 ```ShellSession
 # From a local Docker image
-apptainer build ProtocolQC_<TAG>.sif docker-daemon://australian-epilepsy-project/protocol_qc:<TAG>
+apptainer build ProtocolQC_<TAG>.sif docker-daemon://aepflorey/protocol_qc:<TAG>
 # From DockerHub without installing the Docker image locally
-apptainer build ProtocolQC_<TAG>.sif docker://australian-epilepsy-project/protocol_qc:<TAG>
+apptainer build ProtocolQC_<TAG>.sif docker://aepflorey/protocol_qc:<TAG>
 ```
 
 (as above, replacing "`<TAG>`" with the corresponding software version tag being built)
