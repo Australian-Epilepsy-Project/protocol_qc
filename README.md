@@ -8,9 +8,12 @@
 
 ## Overview
 
-`protocol_qc` is a Python package that aims to allow one to validate a DICOM study against a predefined template file containing key protocol parameters,
+`protocol_qc` is a Python package that aims to allow one to validate a DICOM study
+against a predefined template file containing key protocol parameters,
 primarily via validation of DICOM header fields.
-An overall matching score is calculated for each protocol template, along with any additional information relating to missing/extra series, as well as missing data (i.e., missing slices).
+An overall matching score is calculated for each protocol template,
+along with any additional information relating to missing/extra series,
+as well as missing data (i.e., missing slices).
 
 **Terminology**
 
@@ -29,8 +32,9 @@ Note: `protocol_qc` is very much still under development, and therefore one shou
 
 ### Inputs
 
-As input, one, or more, user defined template files must be provided.
-For specification details see the template introduction [here](/docs/building_a_template.md).
+1.  One or more user-defined *template files* must be provided.
+    For specification details see the template introduction [here](/docs/building_a_template.md).
+2.  DICOM data from a *single imaging session*.
 
 ### Outputs
 
@@ -40,7 +44,10 @@ as well as a brief summary of all protocol template matches.
 Additionally, individual logs for each protocol template are generated and contain detailed information about the matching procedure.
 
 Lastly, a json file containing basic information about the protocol matching can be generated for each template protocol.
-This so-called `tags` file will be created in the same location as the logs. The name of tags file will follow `<patient_identifier>_tags_<protocol_template_filename>.json`, where `<patient_identifier>` can be set with the CLI argument `sub_label`, otherwise it will default to the content in the DICOM header field 'PatientID'.
+This so-called "`tags`" file will be created in the same location as the logs.
+The name of tags file will follow `<patient_identifier>_tags_<protocol_template_filename>.json`,
+where `<patient_identifier>` can be set with the CLI argument `sub_label`,
+otherwise it will default to the content in the DICOM header field 'PatientID'.
 These files contain basic information such as the matching score, at the series, acquisition and protocol level,
 as well as to which data series the template series were matched.
 Additional `custom_tags` can be specified via the template. See [here](/docs/building_a_template.md) for more details.
@@ -75,7 +82,7 @@ optional:
   --logs_dir LOGS_DIR   Directory for the logs will be written to. If the directory does not
                         exist, it will be created. If not provided, the logs will be written
                         into the current working directory.  (default: None)
- --sub_label SUB_LABEL
+  --sub_label SUB_LABEL
                         When generating a tags file, use this to specify a custom
                         subject_label. Not strictly necessary, as the contents of the
                         PatientID field will also be included in subject_details portion of
