@@ -207,6 +207,10 @@ def build_templates(
         logger.info(f"- Acquisition: {label_acq}")
 
         templates_series: list[TemplateSeries] = []
+        if "series" not in specs_acq:
+            raise KeyError(
+                f"Malformed template {template[0]}:"
+                f" no \"series\" nominated for acquisition {label_acq}")
         for label_series, specs_series in specs_acq["series"].items():
             logger.info(f"   - series: {label_series}")
 

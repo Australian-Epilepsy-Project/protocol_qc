@@ -60,12 +60,14 @@ def print_exact_match(protocols: list[TemplateProtocol], logger: logging.Logger)
         exit_code = 0
     elif len(matched) > 1:
         logger.error(
-            "Multiple templates were matched. See above list and individual logs for details"
+            "Multiple templates were matched;"
+            " see above list and individual logs for details"
         )
         exit_code = 1
     else:
         logger.error(
-            "No templates were matched. See above list and individual logs for details"
+            "No templates were perfectly matched;"
+            " see above list and individual logs for details"
         )
         exit_code = 2
 
