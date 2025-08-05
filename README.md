@@ -192,7 +192,7 @@ apptainer build ProtocolQC_<TAG>.sif docker://australian-epilepsy-project/protoc
 
 (as above, replacing "`<TAG>`" with the corresponding software version tag being built)
 
-To the run the tool:
+To then run the tool:
 
 ```ShellSession
 mkdir logs
