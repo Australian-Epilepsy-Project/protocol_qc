@@ -91,12 +91,13 @@ that the received data completely violated the planned acquisition protocol.
 
 Consider for instance session `Template_renaming`.
 
-Here is the difference in the first page of the protocol PRF readouts
+Here is the difference in the first page of the protocol PDF readouts
 between session `Template/` and `Template_renaming/`:
 
-(Note: Reproducing this command call requires installation of the `xpdf` package)
+![First page of template protocol PDF printout](images/00_01_TemplatePDF.png) ![First page of protocol with renamed sequences](images/02_01_TemplateRenamingPDF.png)
 
 ```sh
+# Note: Reproducing this command call requires installation of the Xpdf package
 pdftotext data/Template/protocol.pdf - -l 1 | \
     sed '/^\*$/d' | \
     sed '/^$/d' | \
@@ -125,6 +126,7 @@ csi_slaser
 ```
 
 ```sh
+# Note: Reproducing this command call requires installation of the Xpdf package
 pdftotext data/Template_renaming/protocol.pdf - -l 1 -layout | \
     sed 's/  */ /g' | \
     sed 's/ \*//g' | \
@@ -151,8 +153,6 @@ DWI
 Pulsed ASL
 Spectroscopy
 ```
-
-![First page of template protocol PDF printout](images/00_01_TemplatePDF.png) ![First page of protocol with renamed sequences](images/02_01_TemplateRenamingPDF.png)
 
 For this session,
 the *only* thing that was changed
@@ -200,7 +200,6 @@ Here is the corresponding section of the original template
 ([`templates/01_byseriesdescription.json`](templates/01_byseriesdescription.json)):
 
 ```json
-  ...
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
@@ -228,14 +227,12 @@ Here is the corresponding section of the original template
       }
     }
   },
-  ...
 ```
 
 And here is the corresponding section of the revised protocol
 [`templates/02_bymetadata.json`](templates/02_bymetadata.json):
 
 ```json
-  ...
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
@@ -324,7 +321,6 @@ And here is the corresponding section of the revised protocol
       }
     }
   },
-  ...
 ```
 
 -   Matching of the *acquisition* to the template is no longer done using `SeriesDescription`,

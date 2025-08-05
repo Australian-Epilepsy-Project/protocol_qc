@@ -42,9 +42,8 @@ and the set of DICOM series reconstructed from that protocol:
 
 ![First page of template protocol PDF printout](images/00_01_TemplatePDF.png)
 
-(Note: Reproducing this command call requires installation of the `Xpdf` package)
-
 ```sh
+# Note: Reproducing this command call requires installation of the Xpdf package
 pdftotext data/Template/protocol.pdf - -l 1 | \
     sed '/^\*$/d' | \
     sed '/^$/d' | \

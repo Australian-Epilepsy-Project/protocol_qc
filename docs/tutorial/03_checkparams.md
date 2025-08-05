@@ -66,7 +66,6 @@ the following was added:
       }
     }
   },
-  ...
 ```
 
 Conformity to these metadata fields is enforced for all acquisitions
@@ -92,7 +91,6 @@ Here is the relevant template for that acquisition
 within version 2 of the session template [`templates/02_bymetadata.json`](templates/02_bymetadata.json):
 
 ```json
-  ...
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
@@ -181,7 +179,6 @@ within version 2 of the session template [`templates/02_bymetadata.json`](templa
       }
     }
   },
-  ...
 ```
 
 And here is the corresponding section
@@ -189,7 +186,6 @@ in the new version of that acquisition template
 [`templates/03_checkparams.json`](templates/03_checkparams.json):
 
 ```json
-  ...
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
@@ -374,7 +370,6 @@ in the new version of that acquisition template
       }
     }
   },
-  ...
 ```
 
 There are many more sequence parameters that are now being checked
