@@ -59,14 +59,16 @@ The key is the name of the DICOM header field, as specified by [pydicom](https:/
 the corresponding value is a dictionary containing two keys. "value" stores the value to check against,
 along with the method of comparison stored in the "comparison" value.
 
-There are four types of comparison operators available:
+There are five types of comparison operators available:
 - `exact`
 - `regex`
 - `in_range`
 - `in_set`
+- `absent`
 
 Note, if a regex comparison is performed on a list,
-for example ImageType, and the template list is shorter than the list extracted from the DICOM header,
+for example ImageType,
+and the template list is shorter than the list extracted from the DICOM header,
 only the cells in the DICOM header list up to the range of the template list will be compared.
 
 An example of a *fields* dictionary:
@@ -93,11 +95,14 @@ Often important information is stored in so-called *private* tags in the DICOM h
 Currently a very limited number of these tags are available and differ between classic and enhanced DICOMS.
 
 For classic DICOMS the folllowing are available using the following keys:
-- `PRIVATE-Orientation` = `0x0051,0x100e`
-- `PRIVATE-NumberOfImagesInMosaic` = `0x0019,0x100a`
 - `PRIVATE-AcquisitionDuration` = `0x0051,0x100a`
+- `PRIVATE-CoilElementsUsed` = `0x0051,0x100f`
+- `PRIVATE-GradientMode` = `0x0019,0x100f`
+- `PRIVATE-NumberOfImagesInMosaic` = `0x0019,0x100a`
+- `PRIVATE-Orientation` = `0x0051,0x100e`
+- `PRIVATE-ParallelImagingAcceleration` = `0x0051,0x1101`
 
-For enhacned DICOMS the following are available (represented using `pydicom` notation):
+For enhanced DICOMS the following are available (represented using `pydicom` notation):
 - `ImageTypeText` = ['PerFunctionalGroupsSequence'][0][0x0021,0x11FE][0][0x0021,0x1175]
 
 ### Special keys
@@ -130,7 +135,7 @@ The following table summarises these keys.
 - *check_ordering*: Check if the protocol adheres to the ordering specified in the template.
 - *duplicates_allowed*: Set to true if the presence of duplicates for a given acquisition should not raise an error.
 - *duplicates_expected*: If duplicate acquisitions are expected, this value can be set to an integer and will result in an error in protocol matching if the number of found duplicates does not match the template.
-- *paired_fmaps*: Dictionary to describe if and how fmaps are expected to be paired with the acquisition. See [Paired field maps](#Paired-fieldi-maps) for more details.
+- *paired_fmaps*: Dictionary to describe if and how fmaps are expected to be paired with the acquisition. See [Paired field maps](#Paired-field-maps) for more details.
 - *ignore_ordering*: Exclude an *acquistion* from the final protocol ordering check.
 - *is_optional*: Use to indicate if an acquisition need not be included in the data.
 - *num_files*: Use to determine if the complete data was sent by specifying the number of expected DICOM files per series. See [Data completeness](#data-completeness) for more details on this topic.

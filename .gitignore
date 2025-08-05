@@ -90,3 +90,6 @@ tags
 
 .tags
 .ctags
+
+# Running tutorial, which involves exporting of log files
+docs/tutorial/logs

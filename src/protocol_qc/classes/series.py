@@ -30,7 +30,13 @@ from protocol_qc.match_statuses import MatchStatus
 from protocol_qc.utils.formatting import WIDTHS
 
 ComparisonField = NamedTuple(
-    "ComparisonField", [("name", str), ("value", Any), ("comparison", str)]
+    "ComparisonField",
+    [
+        ("name", str),
+        ("value", Any),
+        ("comparison", str),
+        ("compulsory", bool),
+    ],
 )
 
 SeriesMatch = NamedTuple(
@@ -207,10 +213,23 @@ class TemplateSeries:
         """
 
         if series_desc_info := self.fields.get("SeriesDescription", None):
-            template_regex: str = series_desc_info.get("value", "")
+            try:
+                template_regex: str = series_desc_info.get("value", "")
+            except AttributeError as exc:
+                raise AttributeError(
+                    "Malformed protocol template:"
+                    " SeriesDescription does not contain \"value\""
+                ) from exc
             attribute: str | None = getattr(data, "SeriesDescription", None)
-            if not attribute or re.search(template_regex, attribute):
-                return True
+            try:
+                if not attribute or re.search(template_regex, attribute):
+                    return True
+            except re.error as exc:
+                raise re.error(
+                    "Malformed template:"
+                    f" series \"{self.name}\","
+                    f" regex \"{template_regex}\""
+                ) from exc
             return False
 
         return True
@@ -280,10 +299,28 @@ class TemplateSeries:
         num_files: tuple[int, ...] | int | None
         if num_files := getattr(self, "num_files"):
             if isinstance(num_files, tuple):
+                if not (
+                    len(num_files) == 2 \
+                    and isinstance(num_files[0], int) \
+                    and isinstance(num_files[1], int) \
+                ):
+                    raise TypeError(
+                        "Malformed template:"
+                        f" series {self.name} value for \"num_files\" {num_files}"
+                        " being defined as a list"
+                        " can only be a pair of integers defining a range"
+                    )
                 if num_files[0] <= scan.num_files and num_files[1] >= scan.num_files:
                     return True
                 self.logger.error(
                     f"   files: {scan.num_files} not between {list(num_files)}"
+                )
+            if not isinstance(num_files, int):
+                raise TypeError(
+                    "Malformed template:"
+                    f" series {self.name} value for \"num_files\" {num_files}"
+                    " is neither an integer,"
+                    " nor a list of integers defining a range"
                 )
             if num_files == scan.num_files:
                 return True
@@ -314,12 +351,36 @@ class TemplateSeries:
 
         # Loop over all fields and perform comparisons
         for field_name, details in self.fields.items():
-            field: ComparisonField = ComparisonField(
-                name=field_name,
-                value=details["value"],
-                comparison=details["comparison"],
-            )
-
+            try:
+                field: ComparisonField = ComparisonField(
+                    name=field_name,
+                    value=details.get("value", None),
+                    comparison=details["comparison"],
+                    compulsory=details.get("compulsory", True)
+                )
+            except KeyError as exc:
+                raise KeyError(
+                    "Malformed template \"{self.name}\""
+                    " (require \"comparison\" to be defined):"
+                    f" Series \"{self.name}\";"
+                    f" field \"{field_name}\""
+                ) from exc
+            if field.comparison == "absent":
+                if field.compulsory:
+                    raise KeyError(
+                        f"Malformed template \"{self.name}\""
+                        " (\"comparison\": \"absent\""
+                        " and \"compulsory\": true"
+                        " are mutually exclusive):"
+                        f" Series \"{self.name}\";"
+                        f" field \"{field_name}\"")
+            elif field.value is None:
+                raise KeyError(
+                    "Malformed template \"{self.name}\""
+                    " (require \"value\" to be defined):"
+                    f" Series \"{self.name}\";"
+                    f" field \"{field_name}\""
+                )
             attribute: Any = None
             if is_enhanced is False:
                 if "PRIVATE" in field.name:
@@ -333,7 +394,12 @@ class TemplateSeries:
                     self.logger.warning(f"Field {field_name} not found.")
 
             if attribute is None:
-                self.logger.debug(f"  - {field.name} missing from series")
+                self.logger.debug(
+                    f"  - {field.name} missing from series"
+                    f" ({'' if field.compulsory else 'non-'}compulsory)"
+                )
+                if not field.compulsory or field.comparison == "absent":
+                    num_correct += 1
                 continue
 
             attribute = self.format_header_field(attribute)
@@ -341,11 +407,42 @@ class TemplateSeries:
             if field.comparison == "exact":
                 num_correct += self.compare_exact(field, attribute)
             elif field.comparison == "regex":
-                num_correct += self.compare_regex(field, str(attribute))
+                try:
+                    num_correct += self.compare_regex(field, str(attribute))
+                except re.error as exc:
+                    raise re.error(
+                        f"Malformed template \"{self.name}\":"
+                        " Erroneous regular expression"
+                        f" for field \"{field.name}\""
+                    ) from exc
             elif field.comparison == "in_range":
-                num_correct += self.compare_in_range(field, attribute)
+                try:
+                    num_correct += self.compare_in_range(field, attribute)
+                except TypeError as exc:
+                    raise TypeError(
+                        f"Malformed template \"{self.name}\":"
+                        " Erroneous \"in_range\" comparison"
+                        f" for field \"{field.name}\""
+                    ) from exc
             elif field.comparison == "in_set":
-                num_correct += self.compare_in_set(field, attribute)
+                try:
+                    num_correct += self.compare_in_set(field, attribute)
+                except TypeError as exc:
+                    raise TypeError(
+                        f"Malformed template \"{self.name}\":"
+                        " Erroneous \"in_set\" comparison"
+                        f" for field \"{field.name}\""
+                    ) from exc
+            elif field.comparison == "absent":
+                # Do nothing, this is a mismatch:
+                #   if field were absent, it would have been caught in earlier code
+                pass
+            else:
+                raise KeyError(
+                    f"Malformed template \"{self.name}\:"
+                    f" unrecognised comparison \"{field.comparison}\""
+                    f" for field \"{field.name}\""
+                )
 
         num_fields: int = len(self.fields)
         if num_correct != num_fields:
@@ -408,6 +505,7 @@ class TemplateSeries:
         elif sop_class_uid == "MR Image Storage":
             private_fields = {
                 "NumberOfImagesInMosaic": (0x0019, 0x100A),
+                "BValue": (0x0019, 0x100C),
                 "GradientMode": (0x0019, 0x100F),
                 "Orientation": (0x0051, 0x100E),
                 "AcquisitionDuration": (0x0051, 0x100A),
@@ -623,17 +721,24 @@ class TemplateSeries:
             1 if a match, 0 if not.
         """
 
-        if isinstance(field.value, list):
-            if isinstance(attribute, str):
-                attribute = json.loads(attribute.replace("'", '"'))
-            for val1, val2 in zip(field.value, attribute):
-                if not re.search(val1, val2):
-                    break
+        try:
+            if isinstance(field.value, list):
+                if isinstance(attribute, str):
+                    attribute = json.loads(attribute.replace("'", '"'))
+                for val1, val2 in zip(field.value, attribute):
+                    if not re.search(val1, val2):
+                        break
+                else:
+                    return 1
             else:
-                return 1
-        else:
-            if re.search(field.value, attribute):
-                return 1
+                if re.search(field.value, attribute):
+                    return 1
+        except re.error as exc:
+            raise re.error(
+                "Cannot apply \"regex\" comparison"
+                f" to key \"{field.name}\":"
+                f"Malformed regular expression"
+            ) from exc
 
         self.logger.debug(
             f"    {field.name}: {field.value} regex not matched to {attribute}"
@@ -657,8 +762,22 @@ class TemplateSeries:
             1 if a match, 0 if not.
         """
 
-        if field.value[0] <= float(attribute) <= field.value[1]:
-            return 1
+        if len(field.value) != 2 \
+            or any(not isinstance(value, (int, float)) for value in field.value):
+            raise TypeError(
+                "Cannot apply \"in_range\" comparison"
+                f" to key \"{field.name}\":"
+                "\"value\" must be a list of two numerical values"
+            )
+        try:
+            if field.value[0] <= float(attribute) <= field.value[1]:
+                return 1
+        except TypeError as exc:
+            raise TypeError(
+                "Cannot apply \"in_range\" comparison"
+                f" to key \"{field.name}\""
+                f" (could not convert \"{attribute}\" to float)"
+            ) from exc
 
         self.logger.debug(
             f"    {field.name}: {float(attribute)} not within range ({field.value})"
@@ -680,9 +799,15 @@ class TemplateSeries:
         -------
             1 if a match, 0 if not.
         """
-
-        if attribute in field.value:
-            return 1
+        try:
+            if attribute in field.value:
+                return 1
+        except TypeError as exc:
+            raise TypeError(
+                f"Cannot apply \"in_set\" comparison"
+                f" to key \"{field.name}\":"
+                " type of \"value\" is not an iterable"
+            ) from exc
 
         self.logger.debug(f"    {field.name}: {attribute} not in set ({field.value})")
         return 0

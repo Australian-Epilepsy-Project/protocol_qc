@@ -1,0 +1,3 @@
+[submodule "docs/tutorial/data"]
+	path = docs/tutorial/data
+	url = git@github.com:Australian-Epilepsy-Project/ProtocolDeviations.git
