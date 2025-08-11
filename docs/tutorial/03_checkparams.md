@@ -29,41 +29,13 @@ the following was added:
 {
   "GENERAL": {
     "fields": {
-      "BodyPartExamined": {
-        "value": "BRAIN",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "AngioFlag": {
-        "value": "N",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "ImagedNucleus": {
-        "value": "1H",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "MagneticFieldStrength": {
-        "value": 3,
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "TransmitCoilName": {
-        "value": "Body",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "dBdt": {
-        "value": 0,
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "PatientPosition": {
-        "value": "HFS",
-        "comparison": "exact",
-        "compulsory": false
-      }
+      "BodyPartExamined": { "exactly_if_present": "BRAIN" },
+      "AngioFlag": { "exactly_if_present": "N" },
+      "ImagedNucleus": { "exactly_if_present": "1H" },
+      "MagneticFieldStrength": { "exactly_if_present": 3 },
+      "TransmitCoilName": { "exactly_if_present": "Body" },
+      "dBdt": { "exactly_if_present": 0 },
+      "PatientPosition": { "exactly_if_present": "HFS" }
     }
   },
 ```
@@ -71,8 +43,8 @@ the following was added:
 Conformity to these metadata fields is enforced for all acquisitions
 and therefore all series.
 One distinction here is that for each of these fields,
-an additional flag has been added that specifies that it is *not compulsory*
-for these fields to appear in the empirical metadata;
+the name of the comparison `"exactly_if_present"` implies
+that it is *not compulsory* for these fields to appear in the empirical metadata;
 that is, if that field is absent from the input data,
 that is *not* considered a mismatch against the template;
 it is only when that field is present,
@@ -94,87 +66,32 @@ within version 2 of the session template [`templates/02_bymetadata.json`](templa
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*fl3d\\d+r",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^\\*fl3d\\d+r" }
     },
     "series": {
       "Magnitude (original)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND" ] }
         }
       },
       "Magnitude (normalised)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" } }
         }
       },
       "Phase": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "P",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "P", "ND" ] }
         }
       },
       "R2* map": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "R2_STAR MAP",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "R2_STAR MAP", "ND", "NORM" ] }
         }
       }
     }
@@ -189,183 +106,52 @@ in the new version of that acquisition template
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*fl3d\\d+r",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 25,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": [
-          10,
-          15,
-          20
-        ],
-        "comparison": "in_set"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": [
-          1,
-          2,
-          3
-        ],
-        "comparison": "in_set"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 3,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 90.625,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 310,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          58
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 15,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 58,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          3.59375,
-          3.59375
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Cor|C>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "Normal",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p3",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^\\*fl3d\\d+r" },
+      "SliceThickness": { "exactky": 5 },
+      "RepetitionTime": { "exactly": 25 },
+      "EchoTime": { "in_set": [ 10, 15, 20 ] },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "in_set": [ 1, 2, 3 ] },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 3 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 90.625 },
+      "PixelBandwidth": { "exactly": 310 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 58 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 15 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 58 },
+      "Columns": { "exactly": 64 },
+      "PixelSpacing": { "exactly": [ 3.59375, 3.59375 ] },
+      "PRIVATE-Orientation": { "regex": "^(Cor|C>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "Normal" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p3" }
     },
     "series": {
       "Magnitude (original)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND" ] }
         }
       },
       "Magnitude (normalised)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       },
       "Phase": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "P",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "P", "ND" ] }
         }
       },
       "R2* map": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "R2_STAR MAP",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "R2_STAR MAP", "ND", "NORM" ] }
         }
       }
     }

@@ -2,1001 +2,295 @@
   "GENERAL": {
     "check_ordering": true,
     "fields": {
-      "BodyPartExamined": {
-        "value": "BRAIN",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "AngioFlag": {
-        "value": "N",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "ImagedNucleus": {
-        "value": "1H",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "MagneticFieldStrength": {
-        "value": 3,
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "TransmitCoilName": {
-        "value": "Body",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "dBdt": {
-        "value": 0,
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "PatientPosition": {
-        "value": "HFS",
-        "comparison": "exact",
-        "compulsory": false
-      },
-      "PRIVATE-CoilElementsUsed": {
-        "value": "HE1-4",
-        "comparison": "exact",
-        "compulsory": false
-      }
+      "BodyPartExamined": { "exactly_if_present": "BRAIN" },
+      "AngioFlag": { "exactly_if_present": "N" },
+      "ImagedNucleus": { "exactly_if_present": "1H" },
+      "MagneticFieldStrength": { "exactly_if_present": 3 },
+      "TransmitCoilName": { "exactly_if_present": "Body" },
+      "dBdt": { "exactly_if_present": 0 },
+      "PatientPosition": { "exactly_if_present": "HFS" },
+      "PRIVATE-CoilElementsUsed": { "exactly_if_present": "HE1-4" }
     }
   },
   "Localizer": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*fl2d1",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": "^[lL]ocali[sz]er",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*fl2d1" },
+      "ProtocolName": { "regex": "^[lL]ocali[sz]er" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       }
     }
   },
   "Dual echo gradient echo field map": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SP",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*fm2d2r",
-        "comparison": "exact"
-      },
-      "SliceThickness": {
-        "value": 6,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 200,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 7.38,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 2,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 7.5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 0,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 290,
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "ROW",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 60,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          3,
-          3
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "Fast",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "comparison": "absent",
-        "compulsory": false
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": "SP" },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*fm2d2r" },
+      "SliceThickness": { "exactly": 6 },
+      "RepetitionTime": { "exactly": 200 },
+      "EchoTime": { "exactly": 7.38 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 2 },
+      "SpacingBetweenSlices": { "exactly": 7.5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 64 },
+      "EchoTrainLength": { "exactly": 0 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 290 },
+      "InPlanePhaseEncodingDirection": { "exactly": "ROW" },
+      "FlipAngle": { "exactly": 60 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 64 },
+      "Columns": { "exactly": 64 },
+      "PixelSpacing": { "exactly": [ 3, 3 ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "Fast" },
+      "PRIVATE-ParallelImagingAcceleration": { "absent": null }
     },
     "series": {
       "PhaseDiff": {
         "num_files": 18,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "P",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "P", "ND" ] }
         }
       }
     }
   },
   "T1-weighted FLASH": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*fl2d1",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": "^(?![lL]ocali[sz]er)",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 6,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 2.46,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 7.8,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 167,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 80,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 320,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          0,
-          160,
-          128,
-          0
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "ROW",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 70,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 160,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 160,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          1.375,
-          1.375
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Sag|S>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "comparison": "absent",
-        "compulsory": false
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*fl2d1" },
+      "ProtocolName": { "regex": "^(?![lL]ocali[sz]er)" },
+      "SliceThickness": { "exactly": 6 },
+      "RepetitionTime": { "exactly": 100 },
+      "EchoTime": { "exactly": 2.46 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 7.8 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 167 },
+      "EchoTrainLength": { "exactly": 1 },
+      "PercentSampling": { "exactly": 80 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 320 },
+      "AcquisitionMatrix": { "exactly": [ 0, 160, 128, 0 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "ROW" },
+      "FlipAngle": { "exactly": 70 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 160 },
+      "Columns": { "exactly": 160 },
+      "PixelSpacing": { "exactly": [ 1.375, 1.375 ] },
+      "PRIVATE-Orientation": { "regex": "^(Sag|S>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "absent": null }
     },
     "series": {
       "Image": {
         "num_files": 12,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       }
     }
   },
   "T2-weighted Turbo Spin Echo": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "SE",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*tse2d1_\\d+$",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 6,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 2000,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 26,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 7.8,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 166,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 17,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 220,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          0,
-          128,
-          128,
-          0
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "ROW",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 150,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 256,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 256,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          0.859375,
-          0.859375
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "Normal",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "SE" },
+      "SequenceVariant": { "exactly": [ "SK", "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "regex": "^\\*tse2d1_\\d+$" },
+      "SliceThickness": { "exactly": 6 },
+      "RepetitionTime": { "exactly": 2000 },
+      "EchoTime": { "exactly": 26 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 7.8 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 166 },
+      "EchoTrainLength": { "exactly": 17 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 220 },
+      "AcquisitionMatrix": { "exactly": [ 0, 128, 128, 0 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "ROW" },
+      "FlipAngle": { "exactly": 150 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 256 },
+      "Columns": { "exactly": 256 },
+      "PixelSpacing": { "exactly": [ 0.859375, 0.859375 ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "Normal" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "series": {
       "Image": {
         "num_files": 12,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       }
     }
   },
   "MP2RAGE": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": [
-          "GR",
-          "IR"
-        ],
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP",
-          "MP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "IR",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^(WIP_|)cmp3d1_\\d+ns$",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 2600,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 2.82,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 210,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 93.75,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 240,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          0,
-          224,
-          210,
-          0
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "ROW",
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 224,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 210,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          1.1428571939468,
-          1.1428571939468
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Sag|S>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "Fast",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "comparison": "absent",
-        "compulsory": false
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": [ "GR", "IR" ] },
+      "SequenceVariant": { "exactly": [ "SK", "SP", "MP" ] },
+      "ScanOptions": { "exactly": "IR" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^(WIP_|)cmp3d1_\\d+ns$" },
+      "SliceThickness": { "exactly": 5 },
+      "RepetitionTime": { "exactly": 2600 },
+      "EchoTime": { "exactly": 2.82 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 210 },
+      "EchoTrainLength": { "exactly": 1 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 93.75 },
+      "PixelBandwidth": { "exactly": 240 },
+      "AcquisitionMatrix": { "exactly": [ 0, 224, 210, 0 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "ROW" },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 224 },
+      "Columns": { "exactly": 210 },
+      "PixelSpacing": { "in_range": [ [ 1.14285, 1.14286], [1.14285, 1.14286] ] },
+      "PRIVATE-Orientation": { "regex": "^(Sag|S>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "Fast" },
+      "PRIVATE-ParallelImagingAcceleration": { "absent": null }
     },
     "series": {
       "First inversion": {
         "num_files": 80,
         "fields": {
-          "ImageType": {
-            "value": [
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "M",
-                "ND",
-                "NORM"
-              ],
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "P",
-                "ND"
-              ]
-            ],
-            "comparison": "in_set"
-          },
-          "FlipAngle": {
-            "value": 5,
-            "comparison": "exact"
-          },
-          "InversionTime": {
-            "value": 600,
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "Inv1 Image",
-            "comparison": "exact"
-          }
+          "ImageType": { "in_set": [ [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ],
+                                     [ "ORIGINAL", "PRIMARY", "P", "ND" ] ] },
+          "FlipAngle": { "exactly": 5 },
+          "InversionTime": { "exactly": 600 },
+          "ImageComments": { "exactly": "Inv1 Image" }
         }
       },
       "Second inversion": {
         "num_files": 79,
         "fields": {
-          "ImageType": {
-            "value": [
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "M",
-                "ND",
-                "NORM"
-              ],
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "P",
-                "ND"
-              ]
-            ],
-            "comparison": "in_set"
-          },
-          "FlipAngle": {
-            "value": 5,
-            "comparison": "exact"
-          },
-          "InversionTime": {
-            "value": 2000,
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "Inv2 Image",
-            "comparison": "exact"
-          }
+          "ImageType": { "in_set": [ [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ],
+                                     [ "ORIGINAL", "PRIMARY", "P", "ND" ] ] },
+          "FlipAngle": { "exactly": 5 },
+          "InversionTime": { "exactly": 2000 },
+          "ImageComments": { "exactly": "Inv2 Image" }
         }
       },
       "T1 map": {
         "num_files": 39,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "T1 MAP",
-              "ND"
-            ],
-            "comparison": "exact"
-          },
-          "FlipAngle": {
-            "value": 0,
-            "comparison": "exact"
-          },
-          "InversionTime": {
-            "value": 0,
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "T1 Map",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "T1 MAP", "ND" ] },
+          "FlipAngle": { "exactly": 0 },
+          "InversionTime": { "exactly": 0 },
+          "ImageComments": { "exactly": "T1 Map" }
         }
       },
       "First simulated inversion time": {
         "num_files": 39,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          },
-          "FlipAngle": {
-            "value": 0,
-            "comparison": "exact"
-          },
-          "InversionTime": {
-            "value": 410,
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "Simulated T1 Contrast",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "M", "ND" ] },
+          "FlipAngle": { "exactly": 0 },
+          "InversionTime": { "exactly": 410 },
+          "ImageComments": { "exactly": "Simulated T1 Contrast" }
         }
       },
       "Second simulated inversion time": {
        "num_files": 39,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          },
-          "FlipAngle": {
-            "value": 0,
-            "comparison": "exact"
-          },
-          "InversionTime": {
-            "value": 1100,
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "Simulated T1 Contrast",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "M", "ND" ] },
+          "FlipAngle": { "exactly": 0 },
+          "InversionTime": { "exactly": 1100 },
+          "ImageComments": { "exactly": "Simulated T1 Contrast" }
         }
       },
       "Uniform intensity image": {
         "num_files": 39,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "M",
-              "ND",
-              "UNI"
-            ],
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "Uniform Image",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "M", "ND", "UNI" ] },
+          "ImageComments": { "exactly": "Uniform Image" }
         }
       },
       "Denoised uniform intensity image": {
         "num_files": 39,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "M",
-              "ND",
-              "UNI"
-            ],
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "^Denoised Image \\(lambda = \\d+(\\.\\d+)?\\)$",
-            "comparison": "regex"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "M", "ND", "UNI" ] },
+          "ImageComments": { "regex": "^Denoised Image \\(lambda = \\d+(\\.\\d+)?\\)$" }
         }
       }
     }
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*fl3d\\d+r",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 25,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": [
-          10,
-          15,
-          20
-        ],
-        "comparison": "in_set"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": [
-          1,
-          2,
-          3
-        ],
-        "comparison": "in_set"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 3,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 90.625,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 310,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          58
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 15,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 58,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          3.59375,
-          3.59375
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Cor|C>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "Normal",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p3",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^\\*fl3d\\d+r" },
+      "SliceThickness": { "exactly": 5 },
+      "RepetitionTime": { "exactly": 25 },
+      "EchoTime": { "in_set": [10, 15, 20] },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "in_set": [1, 2, 3] },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 3 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 90.625 },
+      "PixelBandwidth": { "exactly": 310 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 58 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 15 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 58 },
+      "Columns": { "exactly": 64 },
+      "PixelSpacing": { "exactly": [3.59375, 3.59375] },
+      "PRIVATE-Orientation": { "regex": "^(Cor|C>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "Normal" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p3" }
     },
     "series": {
       "Magnitude (original)": {
         "num_files": 90,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND" ] }
         }
       },
       "Magnitude (normalised)": {
         "num_files": 90,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       },
       "Phase": {
         "num_files": 90,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "P",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "P", "ND" ] }
         }
       },
       "R2* map": {
         "num_files": 30,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "R2_STAR MAP",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "R2_STAR MAP", "ND", "NORM" ] }
         }
       }
     }
@@ -1004,146 +298,41 @@
   "Spin-echo EPI (product); A>>P": {
     "ignore_ordering": true,
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "^.*(_ap|A>>P)$",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 4,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 3000,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 60,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 31,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 2440,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          64
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 90,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 128,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 128,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          1.5,
-          1.5
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SP" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*ep_b0" },
+      "SeriesDescription": { "regex": "^.*(_ap|A>>P)$" },
+      "SliceThickness": { "exactly": 4 },
+      "RepetitionTime": { "exactly": 3000 },
+      "EchoTime": { "exactly": 60 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 31 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 2440 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 64 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 90 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 128 },
+      "Columns": { "exactly": 128 },
+      "PixelSpacing": { "exactly": [ 1.5, 1.5 ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "duplicates_expected": 2,
     "series": {
       "Image": {
         "num_files": 25,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
@@ -1151,146 +340,41 @@
   "Spin-echo EPI (product); P>>A": {
     "ignore_ordering": true,
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "^.*(_pa|P>>A)$",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 4,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 3000,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 60,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 31,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 2440,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          64
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 90,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 128,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 128,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          1.5,
-          1.5
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SP" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*ep_b0" },
+      "SeriesDescription": { "regex": "^.*(_pa|P>>A)$" },
+      "SliceThickness": { "exactly": 4 },
+      "RepetitionTime": { "exactly": 3000 },
+      "EchoTime": { "exactly": 60 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 31 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 2440 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 64 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 90 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 128 },
+      "Columns": { "exactly": 128 },
+      "PixelSpacing": { "exactly": [ 1.5, 1.5 ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "duplicates_expected": 2,
     "series": {
       "Image": {
         "num_files": 25,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
@@ -1304,141 +388,40 @@
       "position": "before"
     },
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SK",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*epfid2d\\d+_\\d+$",
-        "comparison": "regex"
-      },
-      "SeriesDescription": {
-        "value": "(^|[\\W_])(task|Task|TASK)$",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 4,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 2800,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 30,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 31,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 2440,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          64
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 90,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          3,
-          3
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": "SK" },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "regex": "^\\*epfid2d\\d+_\\d+$" },
+      "SeriesDescription": { "regex": "(^|[\\W_])(task|Task|TASK)$" },
+      "SliceThickness": { "exactly": 4 },
+      "RepetitionTime": { "exactly": 2800 },
+      "EchoTime": { "exactly": 30 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 31 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 2440 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 64 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 90 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 64 },
+      "Columns": { "exactly": 64 },
+      "PixelSpacing": { "exactly": [3, 3] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "series": {
       "Image": {
         "num_files": 100,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "PERFUSION",
-              "NONE",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "PERFUSION", "NONE", "ND" ] }
         }
       }
     }
@@ -1452,141 +435,40 @@
       "position": "before"
     },
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SK",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*epfid2d\\d+_\\d+$",
-        "comparison": "regex"
-      },
-      "SeriesDescription": {
-        "value": "(^|[\\W_])(rest|Rest|REST)",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 4,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 2800,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 30,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 31,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 2440,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          64
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 90,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          3,
-          3
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": "SK" },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "regex": "^\\*epfid2d\\d+_\\d+$" },
+      "SeriesDescription": { "regex": "(^|[\\W_])(rest|Rest|REST)" },
+      "SliceThickness": { "exactly": 4 },
+      "RepetitionTime": { "exactly": 2800 },
+      "EchoTime": { "exactly": 30 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 31 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 2440 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 64 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 90 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 64 },
+      "Columns": { "exactly": 64 },
+      "PixelSpacing": { "exactly": [ 3, 3 ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "series": {
       "Image": {
         "num_files": 200,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "PERFUSION",
-              "NONE",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "PERFUSION", "NONE", "ND" ] }
         }
       }
     }
@@ -1594,145 +476,40 @@
   "Spin-echo EPI (CMRR); A>>P": {
     "ignore_ordering": true,
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SS"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "^.*(_ap|A>>P)$",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 4,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 3000,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 60,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 31,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 2440,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          64
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 90,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          3,
-          3
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SS" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "ep_b0" },
+      "SeriesDescription": { "regex": "^.*(_ap|A>>P)$" },
+      "SliceThickness": { "exactly": 4 },
+      "RepetitionTime": { "exactly": 3000 },
+      "EchoTime": { "exactly": 60 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 31 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 2440 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 64 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 90 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 64 },
+      "Columns": { "exactly": 64 },
+      "PixelSpacing": { "exactly": [3, 3] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "series": {
       "Image": {
         "num_files": 25,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
@@ -1740,145 +517,40 @@
   "Spin-echo EPI (CMRR); A>>P Inv-RO-PE": {
     "ignore_ordering": true,
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SS"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "[\\W_]?[iI][nN][vV][\\W_]?[rR][oO][\\W_]?[pP][eE]",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 4,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 3000,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 60,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 63,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 31,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 2440,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          64
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 90,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 64,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          3,
-          3
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SS" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "ep_b0" },
+      "SeriesDescription": { "regex": "[\\W_]?[iI][nN][vV][\\W_]?[rR][oO][\\W_]?[pP][eE]" },
+      "SliceThickness": { "exactly": 4 },
+      "RepetitionTime": { "exactly": 3000 },
+      "EchoTime": { "exactly": 60 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 63 },
+      "EchoTrainLength": { "exactly": 31 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 2440 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 64 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 90 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 64 },
+      "Columns": { "exactly": 64 },
+      "PixelSpacing": { "exactly": [3, 3 ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "series": {
       "Image": {
         "num_files": 25,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
@@ -1892,351 +564,107 @@
       "position": "before"
     },
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SS"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": [
-          "PFP",
-          "FS"
-        ],
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SliceThickness": {
-        "value": 4,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 3800,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 81,
-        "comparison": "exact"
-      },
-      "NumberOfAverages": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": [
-          5.199,
-          5.201
-        ],
-        "comparison": "in_range"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 143,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 71,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 1445,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          192,
-          0,
-          0,
-          192
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 90,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "ImageComments": {
-        "value": "SENSE1+",
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          1.1458333730698,
-          1.1458333730698
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "value": "p2",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SS" ] },
+      "ScanOptions": { "exactly": [ "PFP", "FS" ] },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SliceThickness": { "exactly": 4 },
+      "RepetitionTime": { "exactly": 3800 },
+      "EchoTime": { "exactly": 81 },
+      "NumberOfAverages": { "exactly": 1 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "in_range": [5.199, 5.201] },
+      "NumberOfPhaseEncodingSteps": { "exactly": 143 },
+      "EchoTrainLength": { "exactly": 71 },
+      "PercentSampling": { "exactly": 100 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 1445 },
+      "AcquisitionMatrix": { "exactly": [ 192, 0, 0, 192 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 90 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "ImageComments": { "exactly": "SENSE1+" },
+      "PixelSpacing": { "in_range": [ [1.14583, 1.14584], [1.14583, 1.14584] ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "exactly": "p2" }
     },
     "series": {
       "DWI magnitude": {
         "num_files": 7,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+(#\\d+|)$",
-            "comparison": "regex"
-          },
-          "Rows": {
-            "value": 1152,
-            "comparison": "exact"
-          },
-          "Columns": {
-            "value": 1152,
-            "comparison": "exact"
-          },
-          "PRIVATE-BValue": {
-            "value": [0, 5, 10, 15, 985, 990, 995, 1000, 1005, 1010, 1015],
-            "comparison": "in_set"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM", "MOSAIC" ] },
+          "SequenceName": { "regex": "^ep_b\\d+(#\\d+|)$" },
+          "Rows": { "exactly": 1152 },
+          "Columns": { "exactly": 1152 },
+          "PRIVATE-BValue": { "in_set": [0, 5, 10, 15, 985, 990, 995, 1000, 1005, 1010, 1015] }
         }
       },
       "DWI phase": {
         "num_files": 7,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+(#\\d+|)$",
-            "comparison": "regex"
-          },
-          "Rows": {
-            "value": 1152,
-            "comparison": "exact"
-          },
-          "Columns": {
-            "value": 1152,
-            "comparison": "exact"
-          },
-          "PRIVATE-BValue": {
-            "value": [0, 5, 10, 15, 985, 990, 995, 1000, 1005, 1010, 1015],
-            "comparison": "in_set"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "MOSAIC" ] },
+          "SequenceName": { "regex": "^ep_b\\d+(#\\d+|)$" },
+          "Rows": { "exactly": 1152 },
+          "Columns": { "exactly": 1152 },
+          "PRIVATE-BValue": { "in_set": [0, 5, 10, 15, 985, 990, 995, 1000, 1005, 1010, 1015] }
         }
       },
       "ADC": {
         "num_files": 27,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "DIFFUSION",
-              "ADC",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+_\\d+$",
-            "comparison": "regex"
-          },
-          "Rows": {
-            "value": 192,
-            "comparison": "exact"
-          },
-          "Columns": {
-            "value": 192,
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "ADC", "ND", "NORM" ] },
+          "SequenceName": { "regex": "^ep_b\\d+_\\d+$" },
+          "Rows": { "exactly": 192 },
+          "Columns": { "exactly": 192 }
         }
       },
       "Trace-weighted": {
         "num_files": 27,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "DIFFUSION",
-              "TRACEW",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+t$",
-            "comparison": "regex"
-          },
-          "Rows": {
-            "value": 192,
-            "comparison": "exact"
-          },
-          "Columns": {
-            "value": 192,
-            "comparison": "exact"
-          },
-          "PRIVATE-BValue": {
-            "value": [985, 990, 995, 1000, 1005, 1010, 1015],
-            "comparison": "in_set"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "TRACEW", "ND", "NORM" ] },
+          "SequenceName": { "regex": "^ep_b\\d+t$" },
+          "Rows": { "exactly": 192 },
+          "Columns": { "exactly": 192 },
+          "PRIVATE-BValue": { "in_set": [985, 990, 995, 1000, 1005, 1010, 1015] }
         }
       },
       "Fractional Anisotropy": {
         "num_files": 27,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "DIFFUSION",
-              "FA",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+_\\d+$",
-            "comparison": "regex"
-          },
-          "Rows": {
-            "value": 192,
-            "comparison": "exact"
-          },
-          "Columns": {
-            "value": 192,
-            "comparison": "exact"
-          },
-          "SamplesPerPixel": {
-            "value": 1,
-            "comparison": "exact"
-          },
-          "PhotometricInterpretation": {
-            "value": "MONOCHROME2",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "FA", "ND", "NORM" ] },
+          "SequenceName": { "regex": "^ep_b\\d+_\\d+$" },
+          "Rows": { "exactly": 192 },
+          "Columns": { "exactly": 192 },
+          "SamplesPerPixel": { "exactly": 1 },
+          "PhotometricInterpretation": { "exactly": "MONOCHROME2" }
         }
       }
     }
   },
   "Directionally-Encoded Colour FA": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ImageType": {
-        "value": [
-          "DERIVED",
-          "PRIMARY",
-          "DIFFUSION",
-          "FA",
-          "ND",
-          "NORM"
-        ],
-        "comparison": "exact"
-      },
-      "SamplesPerPixel": {
-        "value": 3,
-        "comparison": "exact"
-      },
-      "PhotometricInterpretation": {
-        "value": "RGB",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "FA", "ND", "NORM" ] },
+      "SamplesPerPixel": { "exactly": 3 },
+      "PhotometricInterpretation": { "exactly": "RGB" }
     },
     "series": {
       "Images": {
         "num_files": 27,
         "fields": {
-          "Rows": {
-            "value": 192,
-            "comparison": "exact"
-          },
-          "Columns": {
-            "value": 192,
-            "comparison": "exact"
-          }
+          "Rows": { "exactly": 192 },
+          "Columns": { "exactly": 192 }
         }
       }
     }
   },
   "Diffusion Tensor": {
     "fields": {
-      "ImageType": {
-        "value": [
-          "DERIVED",
-          "PRIMARY",
-          "DIFFUSION",
-          "TENSOR",
-          "ND",
-          "NORM"
-        ],
-        "comparison": "exact"
-      },
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ImageComments": {
-        "value": "DTI Tensor",
-        "comparison": "exact"
-      }
+      "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "TENSOR", "ND", "NORM" ] },
+      "Modality": { "exactly": "MR" },
+      "ImageComments": { "exactly": "DTI Tensor" }
     },
     "series": {
       "Data": {
@@ -2246,189 +674,56 @@
   },
   "Pulsed Arterial Spin Labelling": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SK",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*tgse3d1_\\d+$",
-        "comparison": "regex"
-      },
-      "SliceThickness": {
-        "value": 4.5,
-        "comparison": "exact"
-      },
-      "RepetitionTime": {
-        "value": 2000,
-        "comparison": "exact"
-      },
-      "EchoTime": {
-        "value": 20.26,
-        "comparison": "exact"
-      },
-      "EchoNumbers": {
-        "value": 1,
-        "comparison": "exact"
-      },
-      "SpacingBetweenSlices": {
-        "value": 4.5,
-        "comparison": "exact"
-      },
-      "NumberOfPhaseEncodingSteps": {
-        "value": 62,
-        "comparison": "exact"
-      },
-      "EchoTrainLength": {
-        "value": 31,
-        "comparison": "exact"
-      },
-      "PercentSampling": {
-        "value": 96.875,
-        "comparison": "exact"
-      },
-      "PercentPhaseFieldOfView": {
-        "value": 100,
-        "comparison": "exact"
-      },
-      "PixelBandwidth": {
-        "value": 2440,
-        "comparison": "exact"
-      },
-      "AcquisitionMatrix": {
-        "value": [
-          64,
-          0,
-          0,
-          62
-        ],
-        "comparison": "exact"
-      },
-      "InPlanePhaseEncodingDirection": {
-        "value": "COL",
-        "comparison": "exact"
-      },
-      "FlipAngle": {
-        "value": 180,
-        "comparison": "exact"
-      },
-      "VariableFlipAngleFlag": {
-        "value": "N",
-        "comparison": "exact"
-      },
-      "Rows": {
-        "value": 512,
-        "comparison": "exact"
-      },
-      "Columns": {
-        "value": 512,
-        "comparison": "exact"
-      },
-      "PixelSpacing": {
-        "value": [
-          1.875,
-          1.875
-        ],
-        "comparison": "exact"
-      },
-      "PRIVATE-Orientation": {
-        "value": "^(Tra|T>.*)$",
-        "comparison": "regex"
-      },
-      "PRIVATE-GradientMode": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "PRIVATE-ParallelImagingAcceleration": {
-        "comparison": "absent",
-        "compulsory": false
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": "SK" },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^\\*tgse3d1_\\d+$" },
+      "SliceThickness": { "exactly": 4.5 },
+      "RepetitionTime": { "exactly": 2000 },
+      "EchoTime": { "exactly": 20.26 },
+      "EchoNumbers": { "exactly": 1 },
+      "SpacingBetweenSlices": { "exactly": 4.5 },
+      "NumberOfPhaseEncodingSteps": { "exactly": 62 },
+      "EchoTrainLength": { "exactly": 31 },
+      "PercentSampling": { "exactly": 96.875 },
+      "PercentPhaseFieldOfView": { "exactly": 100 },
+      "PixelBandwidth": { "exactly": 2440 },
+      "AcquisitionMatrix": { "exactly": [ 64, 0, 0, 62 ] },
+      "InPlanePhaseEncodingDirection": { "exactly": "COL" },
+      "FlipAngle": { "exactly": 180 },
+      "VariableFlipAngleFlag": { "exactly": "N" },
+      "Rows": { "exactly": 512 },
+      "Columns": { "exactly": 512 },
+      "PixelSpacing": { "exactly": [ 1.875, 1.875 ] },
+      "PRIVATE-Orientation": { "regex": "^(Tra|T>.*)$" },
+      "PRIVATE-GradientMode": { "exactly": "" },
+      "PRIVATE-ParallelImagingAcceleration": { "absent": null }
     },
     "series": {
       "Images": {
         "num_files": 4,
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "ASL",
-              "NONE",
-              "NORM",
-              "DIS2D",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          },
-          "NumberOfAverages": {
-            "value": 1,
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "ASL", "NONE", "NORM", "DIS2D", "MOSAIC" ] },
+          "NumberOfAverages": { "exactly": 1 }
         }
       },
       "Perfusion-weighted": {
         "num_files": 1,
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "ASL",
-              "NORM",
-              "DIS2D",
-              "SUB",
-              "TTEST",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          },
-          "NumberOfAverages": {
-            "value": 2,
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "ASL", "NORM", "DIS2D", "SUB", "TTEST", "MOSAIC" ] },
+          "NumberOfAverages": { "exactly": 2 }
         }
       }
     }
   },
   "Spectroscopy": {
     "fields": {
-      "ImageType": {
-        "value": [
-          "ORIGINAL",
-          "PRIMARY"
-        ],
-        "comparison": "exact"
-      },
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": [
-          "csi_slaser",
-          "Spectroscopy"
-        ],
-        "comparison": "in_set"
-      },
-      "ImageComments": {
-        "value": "^_pwc_\\d+$",
-        "comparison": "regex"
-      }
+      "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY" ] },
+      "Modality": { "exactly": "MR" },
+      "ProtocolName": { "in_set": [ "csi_slaser", "Spectroscopy" ] },
+      "ImageComments": { "regex": "^_pwc_\\d+$" }
     },
     "series": {
       "Data": {
@@ -2438,27 +733,13 @@
   },
   "Phoenix Report": {
     "fields": {
-      "ImageType": {
-        "value": [
-          "ORIGINAL",
-          "PRIMARY",
-          "OTHER",
-          "CSA REPORT"
-        ],
-        "comparison": "exact"
-      },
-      "Modality": {
-        "value": "SR",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": "Phoenix Document",
-        "comparison": "exact"
-      }
+      "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "OTHER", "CSA REPORT" ] },
+      "Modality": { "exactly": "SR" },
+      "ProtocolName": { "exactly": "Phoenix Document" }
     },
     "series": {
-      "Data": {
-      }
+      "Data": { }
     }
   }
 }
+

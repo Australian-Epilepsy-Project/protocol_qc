@@ -59,31 +59,44 @@ The key is the name of the DICOM header field, as specified by [pydicom](https:/
 the corresponding value is a dictionary containing two keys. "value" stores the value to check against,
 along with the method of comparison stored in the "comparison" value.
 
-There are five types of comparison operators available:
-- `exact`
-- `regex`
+There are six types of comparison operators available:
+- `absent`
+- `exactly`
+- `exactly_if_present`
 - `in_range`
 - `in_set`
-- `absent`
-
-Note, if a regex comparison is performed on a list,
-for example ImageType,
-and the template list is shorter than the list extracted from the DICOM header,
-only the cells in the DICOM header list up to the range of the template list will be compared.
+- `regex`
 
 An example of a *fields* dictionary:
 ```json
 "fields": {
-  "SeriesDescription": {
-    "value": "t1w",
-    "comparison": "regex"
-  },
-  "SequenceName": {
-    "value": "*tfl3d1_16ns",
-    "comparison": "exact"
-  }
+  "SeriesDescription": { "regex": "t1w" },
+  "SequenceName": { "exactly": "*tfl3d1_16ns" }
 }
 ```
+
+Comparison `in_range` requires that the template define a list of two numerical values
+defining the (inclusive) lower and upper bounds of the respective numerical range.
+
+Comparison `in_set` requires that the template define a list of values.
+
+Comparisons `exactly`, `exactly_if_present`, `in_range` and `regex`
+may provide within the template a list of values, which will be interpreted as follows:
+-   `exactly`, `exactly_if_present`: 
+    -   If the template defines a list of strings,
+        then each item in the template list must appear in the list read from the header
+        and vice versa,
+        irrespective of order.
+    -   If the template defines a list of any other data type,
+        then items are compared in their respective orders for equivalence;
+        any items in one list but not the other will be considered a mismatch.
+-   `in_range`:
+    The template must define a list of lists,
+    where each item is a list of two numerical values
+    defining a numerical range as described above.
+-   `regex`:
+    Each item in the list must be a string defining a regular expression;
+    these  will be evaluated against the contents of the DICOM header in order.
 
 *fields* can be defined at any level of the template,
 and will be inherited by all template definitions lower in the hierarchy,
@@ -211,23 +224,23 @@ field to check, the value to check it against, as well as the comparison method.
 
 In the following example, the *tags* section of a protocol template is shown.
 The `protocol_version` and `scanner_type` tags use the `constant` method and therefore will always be generated,
-and have the values `v42` and `Apeture Science`, respectively.
+and have the values `v42` and `Aperture Science`, respectively.
 The tag `scanner_software` uses the `fill_with` method, and will be extracted from the DICOM header field `SoftwareVersions`.
 If it does not exist, "NOT FOUND" will be set.
 Finally, the tag `site` uses the `options` method.
-In this case, the DICOM header field `InsitutationName` is being checked, with the options for the tag being `Earth`, `Mars` and `Pluto`.
+In this case, the DICOM header field `InstitutionName` is being checked, with the options for the tag being `Earth`, `Mars` and `Pluto`.
 
 ```json
 {
   "GENERAL": {
     "tags": {
       "protocol_version": {
-      "type": "constant",
-      "tag": "v42"
+        "type": "constant",
+        "tag": "v42"
       },
       "scanner_type": {
         "type": "constant",
-        "tag": "Apeture Science"
+        "tag": "Aperture Science"
       },
       "scanner_software": {
         "type": "fill_with",
@@ -273,12 +286,12 @@ In this case, the DICOM header field `InsitutationName` is being checked, with t
   },
   "custom_tags": {
     "protocol_version": "v42",
-    "scanner": "Apeture Science",
+    "scanner": "Aperture Science",
     "scanner_software": "GLaDOS",
     "site": "Earth"
   },
   "protocol": {
-    "template_name": "v42_apeture_scanners.json",
+    "template_name": "v42_aperture_scanners.json",
     "protocol_match_score": 1.0,
     "has_issue": false,
     "correct_ordering": "yes",
