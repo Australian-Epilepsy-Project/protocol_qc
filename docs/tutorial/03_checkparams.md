@@ -81,7 +81,7 @@ within version 2 of the session template [`templates/02_bymetadata.json`](templa
       },
       "Magnitude (normalised)": {
         "fields": {
-          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" } }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       },
       "Phase": {
