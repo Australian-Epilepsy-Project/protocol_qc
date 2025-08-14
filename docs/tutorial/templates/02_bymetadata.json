@@ -1,1060 +1,373 @@
 {
   "Localizer": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*fl2d1",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": "^[lL]ocali[sz]er$",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR"},
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*fl2d1" },
+      "ProtocolName": { "regex": "^[lL]ocali[sz]er$" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       }
     }
   },
   "Dual echo gradient echo field map": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SP",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*fm2d2r",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": "SP" },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*fm2d2r" }
     },
     "series": {
       "PhaseDiff": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "P",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "P", "ND" ] }
         }
       }
     }
   },
   "T1-weighted FLASH": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*fl2d1",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": "^(?![lL]ocali[sz]er)",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*fl2d1" },
+      "ProtocolName": { "regex": "^(?![lL]ocali[sz]er)" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       }
     }
   },
   "T2-weighted Turbo Spin Echo": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "SE",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*tse2d1_\\d+$",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "SE" },
+      "SequenceVariant": { "exactly": [ "SK", "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "regex": "^\\*tse2d1_\\d+$" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       }
     }
   },
   "MP2RAGE": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": [
-          "GR",
-          "IR"
-        ],
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP",
-          "MP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "IR",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^(WIP_|)cmp3d1_\\d+ns$",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": [ "GR", "IR" ] },
+      "SequenceVariant": { "exactly": [ "SK", "SP", "MP" ] },
+      "ScanOptions": { "exactly": "IR" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^(WIP_|)cmp3d1_\\d+ns$" }
     },
     "series": {
       "First inversion": {
         "fields": {
-          "ImageType": {
-            "value": [
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "M",
-                "ND",
-                "NORM"
-              ],
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "P",
-                "ND"
-              ]
-            ],
-            "comparison": "in_set"
-          },
-          "ImageComments": {
-            "value": "Inv1 Image",
-            "comparison": "exact"
-          }
+          "ImageType": { "in_set": [ ["ORIGINAL", "PRIMARY", "M", "ND", "NORM"],
+                                     ["ORIGINAL", "PRIMARY", "P", "ND"] ] },
+          "ImageComments": { "exactly": "Inv1 Image" }
         }
       },
       "Second inversion": {
         "fields": {
-          "ImageType": {
-            "value": [
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "M",
-                "ND",
-                "NORM"
-              ],
-              [
-                "ORIGINAL",
-                "PRIMARY",
-                "P",
-                "ND"
-              ]
-            ],
-            "comparison": "in_set"
-          },
-          "ImageComments": {
-            "value": "Inv2 Image",
-            "comparison": "exact"
-          }
+          "ImageType": { "in_set": [ ["ORIGINAL", "PRIMARY", "M", "ND", "NORM"],
+                                     ["ORIGINAL", "PRIMARY", "P", "ND"] ] },
+          "ImageComments": { "exactly": "Inv2 Image" }
         }
       },
       "T1 map": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "T1 MAP",
-              "ND"
-            ],
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "T1 Map",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "T1 MAP", "ND" ] },
+          "ImageComments": { "exactly": "T1 Map" }
         }
       },
       "Simulated inversion time": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "Simulated T1 Contrast",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "M", "ND"] },
+          "ImageComments": { "exactly": "Simulated T1 Contrast" }
         },
         "duplicates_expected": 2
       },
       "Uniform intensity image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "M",
-              "ND",
-              "UNI"
-            ],
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "Uniform Image",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": ["DERIVED", "PRIMARY", "M", "ND", "UNI"] },
+          "ImageComments": { "exactly": "Uniform Image" }
         }
       },
       "Denoised uniform intensity image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "M",
-              "ND",
-              "UNI"
-            ],
-            "comparison": "exact"
-          },
-          "ImageComments": {
-            "value": "^Denoised Image \\(lambda = \\d+(\\.\\d+)?\\)$",
-            "comparison": "regex"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "M", "ND", "UNI" ] },
+          "ImageComments": { "regex": "^Denoised Image \\(lambda = \\d+(\\.\\d+)?\\)$" }
         }
       }
     }
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*fl3d\\d+r",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^\\*fl3d\\d+r" }
     },
     "series": {
       "Magnitude (original)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": ["ORIGINAL", "PRIMARY", "M", "ND" ] }
         }
       },
       "Magnitude (normalised)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": ["ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       },
       "Phase": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "P",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "P", "ND" ] }
         }
       },
       "R2* map": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "R2_STAR MAP",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "R2_STAR MAP", "ND", "NORM" ] }
         }
       }
     }
   },
   "Spin-echo EPI (product); A>>P": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "^.*(_ap|A>>P)$",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SP" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*ep_b0" },
+      "SeriesDescription": { "regex": "^.*(_ap|A>>P)$" }
     },
     "duplicates_expected": 2,
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
   },
   "Spin-echo EPI (product); P>>A": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "*ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "^.*(_pa|P>>A)$",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SP" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "*ep_b0" },
+      "SeriesDescription": { "regex": "^.*(_pa|P>>A)$" }
     },
     "duplicates_expected": 2,
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
   },
   "Task-based fMRI BOLD": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SK",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*epfid2d\\d+_\\d+$",
-        "comparison": "regex"
-      },
-      "SeriesDescription": {
-        "value": "[\\W]*(task|Task|TASK)",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": "SK" },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "regex": "^\\*epfid2d\\d+_\\d+$" },
+      "SeriesDescription": { "regex": "[\\W]*(task|Task|TASK)" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "PERFUSION",
-              "NONE",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "PERFUSION", "NONE", "ND" ] }
         }
       }
     }
   },
   "Resting-state fMRI BOLD": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SK",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*epfid2d\\d+_\\d+$",
-        "comparison": "regex"
-      },
-      "SeriesDescription": {
-        "value": "[\\W]*(rest|Rest|REST)",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": "SK" },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "regex": "^\\*epfid2d\\d+_\\d+$" },
+      "SeriesDescription": { "regex": "[\\W]*(rest|Rest|REST)" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "PERFUSION",
-              "NONE",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "PERFUSION", "NONE", "ND"] }
         }
       }
     }
   },
   "Spin-echo EPI (CMRR); A>>P": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SS"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "^.*(_ap|A>>P)$",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SS" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "ep_b0" },
+      "SeriesDescription": { "regex": "^.*(_ap|A>>P)$" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
   },
   "Spin-echo EPI (CMRR); A>>P Inv-RO-PE": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SS"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "ep_b0",
-        "comparison": "exact"
-      },
-      "SeriesDescription": {
-        "value": "[\\W_]?[iI][nN][vV][\\W_]?[rR][oO][\\W_]?[pP][eE]",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SS" ] },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "2D" },
+      "SequenceName": { "exactly": "ep_b0" },
+      "SeriesDescription": { "regex": "[\\W_]?[iI][nN][vV][\\W_]?[rR][oO][\\W_]?[pP][eE]" }
     },
     "series": {
       "Image": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM" ] }
         }
       }
     }
   },
   "Diffusion MRI": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SK",
-          "SS"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": [
-          "PFP",
-          "FS"
-        ],
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "2D",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": [ "SK", "SS" ] },
+      "ScanOptions": { "exactly": [ "PFP", "FS" ] },
+      "MRAcquisitionType": { "exactly": "2D" }
     },
     "series": {
       "DWI magnitude": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "NORM",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+#\\d+$",
-            "comparison": "regex"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "NORM", "MOSAIC" ] },
+          "SequenceName": { "regex": "^ep_b\\d+#\\d+$" }
         }
       },
       "DWI phase": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "DIFFUSION",
-              "NONE",
-              "ND",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+#\\d+$",
-            "comparison": "regex"
-          }
+          "ImageType": { "exactly": ["ORIGINAL", "PRIMARY", "DIFFUSION", "NONE", "ND", "MOSAIC" ] },
+          "SequenceName": { "regex": "^ep_b\\d+#\\d+$" }
         }
       },
       "ADC": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "DIFFUSION",
-              "ADC",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b0_\\d+$",
-            "comparison": "regex"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "ADC", "ND", "NORM" ] },
+          "SequenceName": { "regex": "^ep_b0_\\d+$" }
         }
       },
       "Trace-weighted": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "DIFFUSION",
-              "TRACEW",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b\\d+t$",
-            "comparison": "regex"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "TRACEW", "ND", "NORM" ] },
+          "SequenceName": { "regex": "^ep_b\\d+t$" }
         }
       },
       "Fractional Anisotropy": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "DIFFUSION",
-              "FA",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          },
-          "SequenceName": {
-            "value": "^ep_b0_\\d+$",
-            "comparison": "regex"
-          },
-          "SamplesPerPixel": {
-            "value": 1,
-            "comparison": "exact"
-          },
-          "PhotometricInterpretation": {
-            "value": "MONOCHROME2",
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "FA", "ND", "NORM" ] },
+          "SequenceName": { "regex": "^ep_b0_\\d+$" },
+          "SamplesPerPixel": { "exactly": 1 },
+          "PhotometricInterpretation": { "exactly": "MONOCHROME2" }
         }
       }
     }
   },
   "Directionally-Encoded Colour FA": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ImageType": {
-        "value": [
-          "DERIVED",
-          "PRIMARY",
-          "DIFFUSION",
-          "FA",
-          "ND",
-          "NORM"
-        ],
-        "comparison": "exact"
-      },
-      "SamplesPerPixel": {
-        "value": 3,
-        "comparison": "exact"
-      },
-      "PhotometricInterpretation": {
-        "value": "RGB",
-        "comparison": "exact"
-      }
+      "Modality": { "exactly": "MR" },
+      "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "FA", "ND", "NORM" ] },
+      "SamplesPerPixel": { "exactly": 3 },
+      "PhotometricInterpretation": { "exactly": "RGB" }
     },
     "series": {
-      "Images": {
-      }
+      "Images": { }
     }
   },
   "Diffusion Tensor": {
     "fields": {
-      "ImageType": {
-        "value": [
-          "DERIVED",
-          "PRIMARY",
-          "DIFFUSION",
-          "TENSOR",
-          "ND",
-          "NORM"
-        ],
-        "comparison": "exact"
-      },
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ImageComments": {
-        "value": "DTI Tensor",
-        "comparison": "exact"
-      }
+      "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "DIFFUSION", "TENSOR", "ND", "NORM" ] },
+      "Modality": { "exactly": "MR" },
+      "ImageComments": { "exactly": "DTI Tensor" }
     },
     "series": {
-      "Data": {
-      }
+      "Data": { }
     }
   },
   "Pulsed Arterial Spin Labelling": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "EP",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": "SK",
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "FS",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*tgse3d1_\\d+$",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "EP" },
+      "SequenceVariant": { "exactly": "SK" },
+      "ScanOptions": { "exactly": "FS" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^\\*tgse3d1_\\d+$" }
     },
     "series": {
       "Images": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "ASL",
-              "NONE",
-              "NORM",
-              "DIS2D",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "ASL", "NONE", "NORM", "DIS2D", "MOSAIC" ] }
         }
       },
       "Perfusion-weighted": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "ASL",
-              "NORM",
-              "DIS2D",
-              "SUB",
-              "TTEST",
-              "MOSAIC"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "ASL", "NORM", "DIS2D", "SUB", "TTEST", "MOSAIC" ] }
         }
       }
     }
   },
   "Spectroscopy": {
     "fields": {
-      "ImageType": {
-        "value": [
-          "ORIGINAL",
-          "PRIMARY"
-        ],
-        "comparison": "exact"
-      },
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": [
-          "csi_slaser",
-          "Spectroscopy"
-        ],
-        "comparison": "in_set"
-      },
-      "ImageComments": {
-        "value": "^_pwc_\\d+$",
-        "comparison": "regex"
-      }
+      "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY" ] },
+      "Modality": { "exactly": "MR" },
+      "ProtocolName": { "in_set": [ "csi_slaser", "Spectroscopy" ] },
+      "ImageComments": { "regex": "^_pwc_\\d+$" }
     },
     "series": {
-      "Data": {
-      }
+      "Data": { }
     }
   },
   "Phoenix Report": {
     "fields": {
-      "ImageType": {
-        "value": [
-          "ORIGINAL",
-          "PRIMARY",
-          "OTHER",
-          "CSA REPORT"
-        ],
-        "comparison": "exact"
-      },
-      "Modality": {
-        "value": "SR",
-        "comparison": "exact"
-      },
-      "ProtocolName": {
-        "value": "Phoenix Document",
-        "comparison": "exact"
-      }
+      "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "OTHER", "CSA REPORT" ] },
+      "Modality": { "exactly": "SR" },
+      "ProtocolName": { "exactly": "Phoenix Document" }
     },
     "series": {
-      "Data": {
-      }
+      "Data": { }
     }
   }
 }
+

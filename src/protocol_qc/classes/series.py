@@ -18,7 +18,7 @@ Series template class.
 """
 
 import dataclasses
-import json
+from enum import Enum
 import logging
 import re
 from typing import Any, NamedTuple
@@ -29,15 +29,51 @@ from protocol_qc.classes.dataseries import DataSeries
 from protocol_qc.match_statuses import MatchStatus
 from protocol_qc.utils.formatting import WIDTHS
 
-ComparisonField = NamedTuple(
-    "ComparisonField",
-    [
-        ("name", str),
-        ("value", Any),
-        ("comparison", str),
-        ("compulsory", bool),
-    ],
-)
+Comparison = Enum("Comparison", "absent exactly exactly_if_present in_range in_set regex")
+
+class Aggregator:
+    def __init__(self, *args):
+        if not len(args):
+            self._num_matches: int = 0
+            self._num_comparisons: int = 0
+            return
+        if len(args) == 2:
+            if not all(isinstance(item, int) for item in args):
+                raise TypeError(
+                    "Aggregator class must be initialised"
+                    " with either a pair of integers or not arguments"
+                )
+            self._num_matches: int = args[0]
+            self._num_comparisons: int = args[1]
+            return
+        raise TypeError(
+            "Aggregator class must be initialised"
+            " with either a pair of integers or not arguments"
+        )
+    def __iadd__(self, other):
+        self._num_matches += other._num_matches
+        self._num_comparisons += other._num_comparisons
+        return self
+    def add_match(self):
+        self._num_matches += 1
+        self._num_comparisons += 1
+    def add_mismatch(self):
+        self._num_comparisons += 1
+    def matches(self) -> int:
+        return int(self._num_matches)
+    def comparisons(self) -> int:
+        return int(self._num_comparisons)
+    def fraction(self) -> float:
+        return self._num_matches / self._num_comparisons
+    @classmethod
+    def one_match(cls):
+        return cls(1, 1)
+    @classmethod
+    def one_mismatch(cls):
+        return cls(0, 1)
+    @classmethod
+    def many_mismatches(cls, number: int):
+        return cls(0, number)
 
 SeriesMatch = NamedTuple(
     "SeriesMatch",
@@ -343,112 +379,71 @@ class TemplateSeries:
             Fraction of the header fields that matched the series template.
         """
 
-        num_correct: float = 0
-
         is_enhanced: bool = False
         if data["SOPClassUID"].repval == "Enhanced MR Image Storage":
             is_enhanced = True
 
         # Loop over all fields and perform comparisons
+        matches: Aggregator = Aggregator()
         for field_name, details in self.fields.items():
-            try:
-                field: ComparisonField = ComparisonField(
-                    name=field_name,
-                    value=details.get("value", None),
-                    comparison=details["comparison"],
-                    compulsory=details.get("compulsory", True)
-                )
-            except KeyError as exc:
+            if len(details) != 1:
                 raise KeyError(
-                    "Malformed template \"{self.name}\""
-                    " (require \"comparison\" to be defined):"
+                    "Malformed template:"
                     f" Series \"{self.name}\";"
                     f" field \"{field_name}\""
+                    " does not have exactly one entry"
                 ) from exc
-            if field.comparison == "absent":
-                if field.compulsory:
-                    raise KeyError(
-                        f"Malformed template \"{self.name}\""
-                        " (\"comparison\": \"absent\""
-                        " and \"compulsory\": true"
-                        " are mutually exclusive):"
-                        f" Series \"{self.name}\";"
-                        f" field \"{field_name}\"")
-            elif field.value is None:
+            comparison_name, reference = next(iter(details.items()))
+            try:
+                comparison = getattr(Comparison, comparison_name)
+            except AttributeError as exc:
                 raise KeyError(
-                    "Malformed template \"{self.name}\""
-                    " (require \"value\" to be defined):"
+                    "Malformed template:"
                     f" Series \"{self.name}\";"
                     f" field \"{field_name}\""
-                )
+                    f" key \"{comparison_name}\" is not a valid comparison type"
+                ) from exc
             attribute: Any = None
             if is_enhanced is False:
-                if "PRIVATE" in field.name:
-                    attribute = self.get_non_keyword_field(field.name, data)
+                if "PRIVATE" in field_name:
+                    attribute = self.get_non_keyword_field(field_name, data)
                 else:
-                    attribute = getattr(data, field.name, None)
+                    attribute = getattr(data, field_name, None)
             else:
                 try:
                     attribute = self.get_enhanced_field(field_name, data)
                 except KeyError:
                     self.logger.warning(f"Field {field_name} not found.")
-
-            if attribute is None:
-                self.logger.debug(
-                    f"  - {field.name} missing from series"
-                    f" ({'' if field.compulsory else 'non-'}compulsory)"
-                )
-                if not field.compulsory or field.comparison == "absent":
-                    num_correct += 1
-                continue
-
             attribute = self.format_header_field(attribute)
+            try:
+                if comparison is Comparison.absent:
+                    matches += self.compare_absent(field_name, reference, attribute)
+                elif comparison is Comparison.exactly:
+                    matches += self.compare_exactly(field_name, reference, attribute)
+                elif comparison is Comparison.exactly_if_present:
+                    matches += self.compare_exactly_if_present(field_name, reference, attribute)
+                elif comparison is Comparison.in_range:
+                    matches += self.compare_in_range(field_name, reference, attribute)
+                elif comparison is Comparison.in_set:
+                    matches += self.compare_in_set(field_name, reference, attribute)
+                elif comparison is Comparison.regex:
+                    matches += self.compare_regex(field_name, reference, attribute)
+                else:
+                    assert False
+            except TypeError as exc:
+                raise TypeError(
+                    "Malformed template:"
+                    f" Series \"{self.name}\";"
+                    f" field \"{field_name}\";"
+                    f" invalid template reference data for comparison \"{comparison_name}\""
+                    f"({details})"
+                ) from exc
 
-            if field.comparison == "exact":
-                num_correct += self.compare_exact(field, attribute)
-            elif field.comparison == "regex":
-                try:
-                    num_correct += self.compare_regex(field, str(attribute))
-                except re.error as exc:
-                    raise re.error(
-                        f"Malformed template \"{self.name}\":"
-                        " Erroneous regular expression"
-                        f" for field \"{field.name}\""
-                    ) from exc
-            elif field.comparison == "in_range":
-                try:
-                    num_correct += self.compare_in_range(field, attribute)
-                except TypeError as exc:
-                    raise TypeError(
-                        f"Malformed template \"{self.name}\":"
-                        " Erroneous \"in_range\" comparison"
-                        f" for field \"{field.name}\""
-                    ) from exc
-            elif field.comparison == "in_set":
-                try:
-                    num_correct += self.compare_in_set(field, attribute)
-                except TypeError as exc:
-                    raise TypeError(
-                        f"Malformed template \"{self.name}\":"
-                        " Erroneous \"in_set\" comparison"
-                        f" for field \"{field.name}\""
-                    ) from exc
-            elif field.comparison == "absent":
-                # Do nothing, this is a mismatch:
-                #   if field were absent, it would have been caught in earlier code
-                pass
-            else:
-                raise KeyError(
-                    f"Malformed template \"{self.name}\:"
-                    f" unrecognised comparison \"{field.comparison}\""
-                    f" for field \"{field.name}\""
-                )
+        result: float = matches.fraction()
+        if result != 1.0:
+            self.logger.debug(f"            {100*(result):.2f}% match")
 
-        num_fields: int = len(self.fields)
-        if num_correct != num_fields:
-            self.logger.debug(f"            {100*(num_correct/num_fields):.2f}% match")
-
-        return num_correct / len(self.fields)
+        return result
 
     def get_non_keyword_field(
         self, field_name: str, data: pydicom.dataset.FileDataset
@@ -679,135 +674,320 @@ class TemplateSeries:
 
         return None
 
-    def compare_exact(self, field: ComparisonField, attribute: Any) -> int:
+    def compare_absent(self, field_name: str, reference: None, attribute: Any) -> Aggregator:
+        """
+        Determine if the header field is appropriately absent
+
+        Parameters
+        ----------
+        field_name
+            Name of the header field being compared.
+        reference
+            Must be None; reflects template defining expected absence of this field.
+        attribute
+            Value of the field read from a DICOM series.
+
+        Returns
+        -------
+            Instance of Aggregator class
+        """
+        if reference is not None:
+            raise TypeError(
+                "Malformed \"absent\" comparison"
+                f" for key \"{field_name}\":"
+                " expect \"null\" as value"
+            )
+        if attribute is None:
+            return Aggregator.one_match()
+
+        self.logger.debug(f"    {field_name}: {attribute} != None")
+        return Aggregator.one_mismatch()
+
+    def compare_exactly(self, field_name: str, reference: Any, attribute: Any) -> Aggregator:
         """
         Determine if the header fields are an exact match.
 
         Parameters
         ----------
-        field
-            Value of the user specified field from template procotol.
+        field_name
+            Name of the header field being compared.
+        reference
+            Expected value for the header field as specified in the protocol template
         attribute
-            Corresponding value of the field from a DICOM series.
+            Value of the field read from a DICOM series.
 
         Returns
         -------
-            1 if a match, 0 if not.
+             Instance of Aggregator class
         """
 
-        if field.value == attribute:
-            return 1
-
-        self.logger.debug(f"    {field.name}: {field.value} != {attribute}")
-        return 0
-
-    def compare_regex(self, field: ComparisonField, attribute: str) -> int:
-        """
-        Determine if the DICOM header field matches the regex specified in the
-        template. If the attribute is a list (e.g., ImageType),
-        the individual entries will be compared. The template list can be shorter
-        than the data list, in which case only a portion of the data list will be
-        checked.
-
-        Parameters
-        ----------
-        field
-            Value of the user specified field from template procotol.
-        attribute
-            Corresponding value of the field from a DICOM series.
-
-        Returns
-        -------
-            1 if a match, 0 if not.
-        """
-
-        try:
-            if isinstance(field.value, list):
-                if isinstance(attribute, str):
-                    attribute = json.loads(attribute.replace("'", '"'))
-                for val1, val2 in zip(field.value, attribute):
-                    if not re.search(val1, val2):
-                        break
-                else:
-                    return 1
+        if isinstance(reference, list):
+            if attribute is None:
+                self.logger.debug(
+                    f"    {field_name}: Absent"
+                )
+                return Aggregator.many_mismatches(len(reference))
+            if isinstance(reference[0], str):
+                if not all(isinstance(item, str) for item in reference[1:]):
+                    raise TypeError(
+                        "Cannot apply \"exactly\" comparison"
+                        f" to key \"{field_name}\":"
+                        " mixture of string and non-string data"
+                        f" in template reference: {reference}"
+                    )
+                num_matches: int = sum(item in reference for item in attribute)
+                num_comparisons: int = num_matches \
+                                     + (len(reference) - num_matches) \
+                                     + (len(attribute) - num_matches)
             else:
-                if re.search(field.value, attribute):
-                    return 1
-        except re.error as exc:
-            raise re.error(
-                "Cannot apply \"regex\" comparison"
-                f" to key \"{field.name}\":"
-                f"Malformed regular expression"
-            ) from exc
+                if any(isinstance(item, str) for item in reference):
+                    raise TypeError(
+                            "Cannot apply \"exactly\" comparison"
+                            f" to key \"{field_name}\":"
+                            " mixture of string and non-string data"
+                            f" in template reference: {reference}"
+                        )
+                num_matches: int = sum(attr == ref for ref, attr in zip(reference, attribute))
+                num_comparisons: int = len(reference) + abs(len(reference) - len(attribute))
+            if num_matches != num_comparisons:
+                self.logger.debug(
+                    f"    {field_name}:"
+                    f" {attribute} != {reference}"
+                    f" ({num_matches} of {num_comparisons} comparisons match)"
+                )
+            return Aggregator(num_matches, num_comparisons)
 
-        self.logger.debug(
-            f"    {field.name}: {field.value} regex not matched to {attribute}"
-        )
-        return 0
+        if attribute == reference:
+            return Aggregator.one_match()
 
-    def compare_in_range(self, field: ComparisonField, attribute: Any) -> int:
+        self.logger.debug(f"    {field_name}: {attribute} != {reference}")
+        return Aggregator.one_mismatch()
+
+    def compare_exactly_if_present(self, field_name: str, reference: Any, attribute: Any) -> Aggregator:
         """
-        Determine if the DICOM header field is within a certain range. The
-        bounds are inclusive.
+        Determine if the header field is either an exact match or absent
 
         Parameters
         ----------
-        field
-            Value of the user specified field from template procotol.
+        field_name
+            Name of the header field being compared.
+        reference
+            Expected value for the header field (if present) as specified in the protocol template.
         attribute
-            Corresponding value of the field from a DICOM series.
+            Value of the field read from a DICOM series.
 
         Returns
         -------
-            1 if a match, 0 if not.
+            Instance of Aggregator class
         """
+        if attribute is None:
+            return Aggregator.one_match()
 
-        if len(field.value) != 2 \
-            or any(not isinstance(value, (int, float)) for value in field.value):
+        return self.compare_exactly(field_name, reference, attribute)
+
+    def compare_in_range(self, field_name: str, reference: Any, attribute: Any) -> Aggregator:
+        """
+        Determine if all values within a DICOM header field lie within numerical ranges
+
+        Parameters
+        ----------
+        field_name
+            Name of the header field being compared.
+        references
+            Expected numerical ranges within which the value must lie;
+            if the DICOM field is a single numerical value,
+            this should be a 2-vector containing lower and upper bounds for that value;
+            if the DICOM field contains multiple numerical values,
+            should be a list-of-lists: one list oer value, each containing lower and upper bounds
+        attributes
+            Value of the field read from a DICOM series
+
+        Returns
+        -------
+            Instance of Aggregator class
+        """
+        if not isinstance(reference, list):
             raise TypeError(
                 "Cannot apply \"in_range\" comparison"
-                f" to key \"{field.name}\":"
-                "\"value\" must be a list of two numerical values"
+                f" to key \"{field_name}\":"
+                " reference values not provided as a list"
+            )
+        if attribute is None:
+            self.logger.debug(
+                f"    {field_name}: Absent"
+            )
+            Aggregator.many_mismatches(len(reference))
+        if isinstance(reference[0], list):
+            if not all(isinstance(item, list) for item in reference):
+                raise TypeError(
+                    "Cannot apply \"in_range\" comparison"
+                    f" to key \"{field_name}\":"
+                    " first element is a list,"
+                    " but not all subsequent elements are lists"
+                )
+            if not all(len(item) == 2 for item in reference):
+                raise TypeError(
+                    "Cannot apply \"in_range\" comparison"
+                    f" to key \"{field_name}\":"
+                    " all lists must be of length 2"
+                    " (encoding lower and upper bounds of range for each element)"
+                )
+            try:
+                len(attribute)
+            except TypeError as exc:
+                self.logger.debug(
+                    f"    {field_name}: {attribute} not a list"
+                )
+                return Aggregator.many_mismatches(len(reference))
+            result: Aggregator = Aggregator()
+            for ref, attr in zip(reference, attribute):
+                result += self.compare_in_range(field_name, ref, attr)
+            for _ in range(abs(len(reference) - len(attribute))):
+                result.add_mismatch()
+            if result.matches() != result.comparisons():
+                self.logger.debug(
+                    f"    {field_name}:"
+                    f" {attribute} != {reference}"
+                    f" ({result.matches()} of {result.comparisons()} comparisons match)"
+                )
+            return result
+        if not len(reference) == 2:
+            raise TypeError(
+                "Cannot apply \"in_range\" comparison"
+                f" to key \"{field_name}\":"
+                " reference must be a list with two values"
             )
         try:
-            if field.value[0] <= float(attribute) <= field.value[1]:
-                return 1
+            float(reference[0])
+            float(reference[1])
         except TypeError as exc:
             raise TypeError(
                 "Cannot apply \"in_range\" comparison"
-                f" to key \"{field.name}\""
-                f" (could not convert \"{attribute}\" to float)"
+                f" to key \"{field_name}\":"
+                " template reference values are not numeric"
             ) from exc
+        if reference[1] < reference[0]:
+            raise TypeError(
+                "Cannot apply \"in_range\" comparison"
+                f" to key \"{field_name}\":"
+                " template reference values are in wrong order"
+            )
+        try:
+            attribute_as_float: float = float(attribute)
+            if reference[0] <= attribute_as_float <= reference[1]:
+                return Aggregator.one_match()
+            self.logger.debug(
+                f"    {field_name}: {attribute_as_float} not within range {reference}"
+            )
+            return Aggregator.one_mismatch()
+        except TypeError:
+            self.logger.debug(
+                f"    {field_name}: {attribute} not numeric"
+            )
+            return Aggregator.one_mismatch()
 
-        self.logger.debug(
-            f"    {field.name}: {float(attribute)} not within range ({field.value})"
-        )
-        return 0
 
-    def compare_in_set(self, field: ComparisonField, attribute: Any) -> int:
+    def compare_in_set(self, field_name: str, reference: list, attribute: Any) -> Aggregator:
         """
         Determine if the DICOM header field is contained within a set of values.
 
         Parameters
         ----------
-        field
-            Value of the user specified field from template procotol.
+        field_name
+            Name of the DICOM header field being compared.
+        reference
+            List of permissible values as defined in the protocol template.
         attribute
             Corresponding value of the field from a DICOM series.
 
         Returns
         -------
-            1 if a match, 0 if not.
+            Instance of Aggregator class
         """
         try:
-            if attribute in field.value:
-                return 1
+            if attribute in reference:
+                return Aggregator.one_match()
         except TypeError as exc:
             raise TypeError(
                 f"Cannot apply \"in_set\" comparison"
-                f" to key \"{field.name}\":"
-                " type of \"value\" is not an iterable"
+                f" to key \"{field_name}\":"
+                " template type is not an iterable"
             ) from exc
 
-        self.logger.debug(f"    {field.name}: {attribute} not in set ({field.value})")
-        return 0
+        self.logger.debug(f"    {field_name}: {attribute} not in set {reference}")
+        return Aggregator.one_mismatch()
+
+    def compare_regex(self, field_name: str, reference: Any, attribute: Any) -> Aggregator:
+        """
+        Determine if the DICOM header field matches the regex specified in the template.
+
+        Parameters
+        ----------
+        field_name
+            Name of the DICOM header field being compared.
+        reference
+            Value of the field specified in the template procotol;
+            either a string containing a regular expression,
+            or a list of strings each of which is a regular expression
+        attribute
+            Corresponding value of the field from a DICOM series.
+
+        Returns
+        -------
+            Instance of Aggregator class
+        """
+
+        if isinstance(reference, list):
+            if not all(isinstance(item, str) for item in reference):
+                raise TypeError(
+                    "Cannot apply \"regex\" comparison"
+                    f" to key \"{field_name}\":"
+                    " All entries in template must be strings"
+                )
+            if not isinstance(attribute, list):
+                self.logger.debug(
+                    f"    {field_name}: Template reference is list,"
+                    " input data are not"
+                )
+                return Aggregator.many_mismatches(len(reference))
+            result: Aggregator = Aggregator()
+            for ref, attr in zip(reference, attribute):
+                result += self.compare_regex(field_name, ref, attr)
+            for _ in range(0, abs(len(reference) - len(attribute))):
+                result.add_mismatch()
+            if result.fraction() != 1.0:
+                self.logger.debug(
+                    f"    {field_name}:"
+                    f" {attribute} != {reference}"
+                    f" ({result.matches()} of {result.comparisons()}"
+                    " comparisons match)"
+                )
+            return result
+
+        if attribute is None:
+            self.logger.debug(
+                f"    {field_name}: Absent"
+            )
+            return Aggregator.one_mismatch()
+        if not isinstance(attribute, str):
+            self.logger.debug(
+                f"    {field_name}: Value \"{attribute}\""
+                " not a string suitable for regex"
+            )
+            return Aggregator.one_mismatch()
+        try:
+            if re.search(reference, attribute):
+                return Aggregator.one_match()
+        except re.error as exc:
+            raise TypeError(
+                "Cannot apply \"regex\" comparison"
+                f" to key \"{field_name}\":"
+                f" Malformed regular expression \"{reference}\""
+            ) from exc
+
+        self.logger.debug(
+            f"    {field_name}: \"{reference}\" regex not matched to {attribute}"
+        )
+        return Aggregator.one_mismatch()
+
+
