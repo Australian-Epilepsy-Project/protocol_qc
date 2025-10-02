@@ -75,7 +75,7 @@ Every item in this list represents a single *acquisition*.
 It is presented at the scanner console for configuration and execution,
 and once executed takes some duration of time to acquire data.
 
-Now contrast ths against the set of sub-directories containing the images generated from execution of the session protocol:
+Now contrast this against the set of sub-directories containing the images generated from execution of the session protocol:
 
 ```sh
 ls data/Template/
