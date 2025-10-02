@@ -686,7 +686,7 @@ class TemplateSeries:
         Parameters
         ----------
         field
-            Value of the user specified field from template procotol.
+            Value of the user specified field from template protocol.
         attribute
             Corresponding value of the field from a DICOM series.
 
@@ -712,7 +712,7 @@ class TemplateSeries:
         Parameters
         ----------
         field
-            Value of the user specified field from template procotol.
+            Value of the user specified field from template protocol.
         attribute
             Corresponding value of the field from a DICOM series.
 
@@ -753,7 +753,7 @@ class TemplateSeries:
         Parameters
         ----------
         field
-            Value of the user specified field from template procotol.
+            Value of the user specified field from template protocol.
         attribute
             Corresponding value of the field from a DICOM series.
 
@@ -791,7 +791,7 @@ class TemplateSeries:
         Parameters
         ----------
         field
-            Value of the user specified field from template procotol.
+            Value of the user specified field from template protocol.
         attribute
             Corresponding value of the field from a DICOM series.
 
