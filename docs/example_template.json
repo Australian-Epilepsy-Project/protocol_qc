@@ -17,7 +17,7 @@
       },
       "scanner_type": {
         "type": "constant",
-        "tag": "Apeture Science"
+        "tag": "Aperture Science"
       },
       "scanner_software": {
         "type": "fill_with",

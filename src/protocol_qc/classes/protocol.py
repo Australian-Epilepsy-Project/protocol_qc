@@ -219,7 +219,7 @@ class TemplateProtocol:
 
     def _set_paired_fmap_defaults(self) -> None:
         """
-        Set the paired fmap defaults for the template procotol.
+        Set the paired fmap defaults for the template protocol.
         """
 
         self.paired_fmaps = {

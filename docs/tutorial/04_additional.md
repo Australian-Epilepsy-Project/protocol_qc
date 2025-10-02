@@ -22,9 +22,9 @@ it is the role of the ProtocolQC software
 (and the designer of the protocol template)
 to diagnose the deviations within these datasets.
 
-Docuemntation page [`sessions/README.md`](sessions/README.md)
+Documentation page [`sessions/README.md`](sessions/README.md)
 provides a list of these sessions,
-linking to individual pages per sesions
+linking to individual pages per sessions
 that explain what the software reports in each instance,
 how to interpret those results,
 and the nature of the actual deviations

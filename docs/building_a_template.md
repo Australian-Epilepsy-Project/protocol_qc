@@ -94,7 +94,7 @@ unless the "share_fields" flag has been set (see [Special Keys](#special-keys)).
 Often important information is stored in so-called *private* tags in the DICOM header (https://dicom.nema.org/dicom/2013/output/chtml/part05/sect_7.8.html).
 Currently a very limited number of these tags are available and differ between classic and enhanced DICOMS.
 
-For classic DICOMS the folllowing are available using the following keys:
+For classic DICOMS the following are available using the following keys:
 - `PRIVATE-AcquisitionDuration` = `0x0051,0x100a`
 - `PRIVATE-CoilElementsUsed` = `0x0051,0x100f`
 - `PRIVATE-GradientMode` = `0x0019,0x100f`
@@ -136,7 +136,7 @@ The following table summarises these keys.
 - *duplicates_allowed*: Set to true if the presence of duplicates for a given acquisition should not raise an error.
 - *duplicates_expected*: If duplicate acquisitions are expected, this value can be set to an integer and will result in an error in protocol matching if the number of found duplicates does not match the template.
 - *paired_fmaps*: Dictionary to describe if and how fmaps are expected to be paired with the acquisition. See [Paired field maps](#Paired-field-maps) for more details.
-- *ignore_ordering*: Exclude an *acquistion* from the final protocol ordering check.
+- *ignore_ordering*: Exclude an *acquisition* from the final protocol ordering check.
 - *is_optional*: Use to indicate if an acquisition need not be included in the data.
 - *num_files*: Use to determine if the complete data was sent by specifying the number of expected DICOM files per series. See [Data completeness](#data-completeness) for more details on this topic.
 
@@ -211,7 +211,7 @@ field to check, the value to check it against, as well as the comparison method.
 
 In the following example, the *tags* section of a protocol template is shown.
 The `protocol_version` and `scanner_type` tags use the `constant` method and therefore will always be generated,
-and have the values `v42` and `Apeture Science`, respectively.
+and have the values `v42` and `Aperture Science`, respectively.
 The tag `scanner_software` uses the `fill_with` method, and will be extracted from the DICOM header field `SoftwareVersions`.
 If it does not exist, "NOT FOUND" will be set.
 Finally, the tag `site` uses the `options` method.
@@ -227,7 +227,7 @@ In this case, the DICOM header field `InsitutationName` is being checked, with t
       },
       "scanner_type": {
         "type": "constant",
-        "tag": "Apeture Science"
+        "tag": "Aperture Science"
       },
       "scanner_software": {
         "type": "fill_with",
@@ -273,7 +273,7 @@ In this case, the DICOM header field `InsitutationName` is being checked, with t
   },
   "custom_tags": {
     "protocol_version": "v42",
-    "scanner": "Apeture Science",
+    "scanner": "Aperture Science",
     "scanner_software": "GLaDOS",
     "site": "Earth"
   },

@@ -3,7 +3,7 @@
 ### Observations from outcomes of first working version
 
 From the initial results of executing the software
-showin in document [`01_firsttemplate.md`](01_firsttemplate.md),
+showing in document [`01_firsttemplate.md`](01_firsttemplate.md),
 there are several conclusions to be drawn
 that will inform how the template should be initially modified.
 
