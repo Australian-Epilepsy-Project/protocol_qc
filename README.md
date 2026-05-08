@@ -199,6 +199,47 @@ mkdir logs
 ProtocolQC_<TAG>.sif templates/ DICOM/ --logs_dir logs/
 ```
 
+## Upgrading from v0.2.x
+
+Version 0.3.0 introduces a breaking change to the protocol template file format.
+Field comparison specifications, which previously used a two-key `"value"` / `"comparison"` dict,
+are now expressed as a single-key dict where the key is the comparison type:
+
+| Old format | New format |
+|---|---|
+| `{"value": X, "comparison": "exact"}` | `{"exactly": X}` |
+| `{"value": X, "comparison": "exact", "compulsory": false}` | `{"exactly_if_present": X}` |
+| `{"comparison": "absent"}` | `{"absent": null}` |
+| `{"value": X, "comparison": "regex"}` | `{"regex": X}` |
+| `{"value": [a, b], "comparison": "in_range"}` | `{"in_range": [a, b]}` |
+| `{"value": [...], "comparison": "in_set"}` | `{"in_set": [...]}` |
+
+A conversion script is provided at `src/protocol_qc/convert_template.py`
+to automatically migrate existing templates to the new format.
+The script requires Python 3.10 or later (the same requirement as the package itself)
+and has no additional dependencies.
+
+**Convert a single file** (writes a `.new.json` sidecar alongside the original):
+
+```ShellSession
+python3 src/protocol_qc/convert_template.py my_template.json
+```
+
+**Convert a single file in-place** (overwrites the original):
+
+```ShellSession
+python3 src/protocol_qc/convert_template.py --in-place my_template.json
+```
+
+**Convert every template in a directory in-place**:
+
+```ShellSession
+python3 src/protocol_qc/convert_template.py --in-place templates/
+```
+
+The script is idempotent: running it on a template that is already in the new format
+leaves the file unchanged.
+
 ## Limitations
 
 - No check is performed to ensure there is a one-to-one mapping between the *series* template matches and the data.
