@@ -6,14 +6,13 @@
     },
     "fields": {
       "InstituteName": {
-        "value": "Scans R Us",
-        "comparison": "regex"
+        "regex": "Scans R Us"
       }
     },
     "tags": {
       "protocol_version": {
-      "type": "constant",
-      "tag": "v42"
+        "type": "constant",
+        "tag": "v42"
       },
       "scanner_type": {
         "type": "constant",
@@ -28,18 +27,18 @@
         "tag": {
           "Earth": {
             "field": "InstitutionName",
-            "value": "Earth Base",
-            "comparison": "exact"
+            "exactly": "Earth Base"
           },
           "Mars": {
             "field": "InstitutionName",
-            "value": ["Mars", "The Red Institute"],
-            "comparison": "in_set"
+            "in_set": [
+              "Mars",
+              "The Red Institute"
+            ]
           },
           "Pluto": {
             "field": "InstitutionName",
-            "value": "Pluto MRI Services",
-            "comparison": "regex"
+            "regex": "Pluto MRI Services"
           }
         }
       }
@@ -49,27 +48,22 @@
     "duplicates_allowed": false,
     "fields": {
       "SeriesDescription": {
-        "value": "t1w",
-        "comparison": "regex"
+        "regex": "t1w"
       },
       "SequenceName": {
-        "value": "*ppl3d1_42ns",
-        "comparison": "exact"
+        "exactly": "*ppl3d1_42ns"
       },
       "ScanOptions": {
-        "value": [
+        "exactly": [
           "IR",
           "WE"
-        ],
-        "comparison": "exact"
+        ]
       },
       "Rows": {
-        "value": 256,
-        "comparison": "exact"
+        "exactly": 256
       },
       "Columns": {
-        "value": 256,
-        "comparison": "exact"
+        "exactly": 256
       }
     },
     "series": {
@@ -78,13 +72,12 @@
         "share_fields": false,
         "fields": {
           "ImageType": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "M",
               "ND"
-            ],
-            "comparison": "exact"
+            ]
           }
         }
       },
@@ -92,14 +85,13 @@
         "num_files": 192,
         "fields": {
           "ImageType": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "M",
               "ND",
               "NORM"
-            ],
-            "comparison": "exact"
+            ]
           }
         }
       }
@@ -109,8 +101,7 @@
     "duplicates_allowed": false,
     "fields": {
       "SeriesDescription": {
-        "value": "DWI_Ax_AP_52Dir",
-        "comparison": "regex"
+        "regex": "DWI_Ax_AP_52Dir"
       }
     },
     "series": {
@@ -118,12 +109,10 @@
         "num_files": 2,
         "fields": {
           "ImageComments": {
-            "value": "Single-band reference SENSE1+",
-            "comparison": "exact"
+            "exactly": "Single-band reference SENSE1+"
           },
           "ScanningSequence": {
-            "value": "EP",
-            "comparison": "exact"
+            "exactly": "EP"
           }
         }
       },
@@ -131,46 +120,41 @@
         "num_files": 42,
         "fields": {
           "Rows": {
-            "value": 1280,
-            "comparison": "exact"
+            "exactly": 1280
           },
           "Columns": {
-            "value": 1280,
-            "comparison": "exact"
+            "exactly": 1280
           },
           "NumberOfImagesInMosaic": {
-            "value": 84,
-            "comparison": "exact"
+            "exactly": 84
           }
+        }
       },
       "phase": {
         "num_files": 42,
         "fields": {
           "Rows": {
-            "value": 1280,
-            "comparison": "exact"
+            "exactly": 1280
           },
           "Columns": {
-            "value": 1280,
-            "comparison": "exact"
+            "exactly": 1280
           },
           "NumberOfImagesInMosaic": {
-            "value": 84,
-            "comparison": "exact"
-          },
+            "exactly": 84
+          }
+        }
       },
       "PhysioLog": {
         "num_files": 1,
         "share_fields": false,
         "fields": {
           "ImageType": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "RAWDATA",
               "PHYSIO"
-            ],
-            "comparison": "exact"
+            ]
           }
         }
       }
@@ -187,38 +171,32 @@
     },
     "fields": {
       "SeriesDescription": {
-        "value": "Pseudoword",
-        "comparison": "regex"
+        "regex": "Pseudoword"
       },
       "SequenceName": {
-        "value": "lpfid223_42",
-        "comparison": "exact"
+        "exactly": "lpfid223_42"
       },
       "Rows": {
-        "value": 80,
-        "comparison": "exact"
+        "exactly": 80
       },
       "Columns": {
-        "value": 72,
-        "comparison": "exact"
-      },
+        "exactly": 72
+      }
     },
     "series": {
       "SBref_mag": {
         "num_files": 3,
         "fields": {
           "ImageType": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "FMRI",
               "NONE"
-            ],
-            "comparison": "exact"
+            ]
           },
           "ImageComments": {
-              "value": "Single-band reference SENSE1+",
-              "comparison": "regex"
+            "regex": "Single-band reference SENSE1+"
           }
         }
       },
@@ -226,21 +204,18 @@
         "num_files": 3,
         "fields": {
           "ComplexImageComponent": {
-            "value": "PHASE",
-            "comparison": "exact"
+            "exactly": "PHASE"
           },
           "ImageType": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "FMRI",
               "NONE"
-            ],
-            "comparison": "exact"
+            ]
           },
           "ImageComments": {
-              "value": "Single-band reference SENSE1+",
-              "comparison": "regex"
+            "regex": "Single-band reference SENSE1+"
           }
         }
       },
@@ -248,15 +223,14 @@
         "num_files": 42,
         "fields": {
           "ImageTypeText": {
-            "value": [
+            "regex": [
               "ORIGINAL",
               "PRIMARY",
               "M",
               "MB",
               "TE",
               "ND"
-            ],
-            "comparison": "regex"
+            ]
           }
         }
       },
@@ -264,15 +238,14 @@
         "num_files": 42,
         "fields": {
           "ImageTypeText": {
-            "value": [
+            "regex": [
               "ORIGINAL",
               "PRIMARY",
               "P",
               "MB",
               "TE",
               "ND"
-            ],
-            "comparison": "regex"
+            ]
           }
         }
       },
@@ -281,8 +254,7 @@
         "share_fields": false,
         "fields": {
           "SeriesDescription": {
-            "value": "Pseudoword.*PhysioLog",
-            "comparison": "regex"
+            "regex": "Pseudoword.*PhysioLog"
           }
         }
       }
@@ -293,20 +265,16 @@
     "ignore_ordering": true,
     "fields": {
       "SeriesDescription": {
-        "value": "FMap_AxObl_AP-",
-        "comparison": "regex"
+        "regex": "FMap_AxObl_AP-"
       },
       "Rows": {
-        "value": 112,
-        "comparison": "exact"
+        "exactly": 112
       },
       "Columns": {
-        "value": 112,
-        "comparison": "exact"
+        "exactly": 112
       },
       "SequenceName": {
-        "value": "asdasd23_42",
-        "comparison": "exact"
+        "exactly": "asdasd23_42"
       }
     },
     "series": {
@@ -315,17 +283,15 @@
         "share_fields": false,
         "fields": {
           "SeriesDescription": {
-            "value": "FMap_AxObl_AP-",
-            "comparison": "regex"
+            "regex": "FMap_AxObl_AP-"
           },
           "ImageType": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "OTHER",
               "NONE"
-            ],
-            "comparison": "exact"
+            ]
           }
         }
       },
@@ -333,14 +299,13 @@
         "num_files": 1,
         "fields": {
           "ImageTypeText": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "M",
               "ND",
               "NORM"
-            ],
-            "comparison": "exact"
+            ]
           }
         }
       }
@@ -351,20 +316,16 @@
     "ignore_ordering": true,
     "fields": {
       "SeriesDescription": {
-        "value": "FMap_AxObl_AP_InvROPE(|-)",
-        "comparison": "regex"
+        "regex": "FMap_AxObl_AP_InvROPE(|-)"
       },
       "Rows": {
-        "value": 112,
-        "comparison": "exact"
+        "exactly": 112
       },
       "Columns": {
-        "value": 112,
-        "comparison": "exact"
+        "exactly": 112
       },
       "SequenceName": {
-        "value": "asdasd23_42",
-        "comparison": "exact"
+        "exactly": "asdasd23_42"
       }
     },
     "series": {
@@ -373,17 +334,15 @@
         "share_fields": false,
         "fields": {
           "SeriesDescription": {
-            "value": "FMap_AxObl_AP_InvROPE(|-)_PhysioLog",
-            "comparison": "regex"
+            "regex": "FMap_AxObl_AP_InvROPE(|-)_PhysioLog"
           },
           "ImageType": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "OTHER",
               "NONE"
-            ],
-            "comparison": "exact"
+            ]
           }
         }
       },
@@ -391,14 +350,13 @@
         "num_files": 1,
         "fields": {
           "ImageTypeText": {
-            "value": [
+            "exactly": [
               "ORIGINAL",
               "PRIMARY",
               "M",
               "ND",
               "NORM"
-            ],
-            "comparison": "exact"
+            ]
           }
         }
       }
