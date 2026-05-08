@@ -12,8 +12,8 @@
     },
     "tags": {
       "protocol_version": {
-      "type": "constant",
-      "tag": "v42"
+        "type": "constant",
+        "tag": "v42"
       },
       "scanner_type": {
         "type": "constant",
