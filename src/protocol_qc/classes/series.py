@@ -392,7 +392,7 @@ class TemplateSeries:
                     f" Series \"{self.name}\";"
                     f" field \"{field_name}\""
                     " does not have exactly one entry"
-                ) from exc
+                )
             comparison_name, reference = next(iter(details.items()))
             try:
                 comparison = getattr(Comparison, comparison_name)
