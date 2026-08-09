@@ -153,7 +153,7 @@ def get_num_files(fields_series: dict[str, Any]) -> tuple[int, ...] | int | None
         If number of files is incorrectly specified.
     """
 
-    exp_num_files: dict[str, int] | int | None = fields_series.pop("num_files", None)
+    exp_num_files: list[int] | int | None = fields_series.pop("num_files", None)
 
     num_files: tuple[int, ...] | int | None
     if not exp_num_files:
@@ -161,12 +161,13 @@ def get_num_files(fields_series: dict[str, Any]) -> tuple[int, ...] | int | None
         num_files = exp_num_files
     elif isinstance(exp_num_files, int):
         num_files = exp_num_files
-    elif isinstance(exp_num_files, dict):
-        num_files = tuple([exp_num_files["min"], exp_num_files["max"]])
+    elif isinstance(exp_num_files, list):
+        num_files = tuple(exp_num_files)
     else:
         raise ValueError(
             "Expected number of files must be specified as either an int or "
-            "a dict containing 'min' and 'max' keys. Please check template."
+            f"a list containing min and max values. Recieved: {type(exp_num_files)}. "
+            "Please check template."
         )
 
     return num_files
