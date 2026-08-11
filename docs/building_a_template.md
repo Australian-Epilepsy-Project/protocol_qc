@@ -140,7 +140,7 @@ The following table summarises these keys.
 | *ignore_ordering*      | bool         | no       | False   |
 | *series*               | dict         | yes      | -       |
 | **Series Level**                                           |
-| *num_files*            | int          | no       | None    |
+| *num_files*            | tuple[int,int] or int | no       | None    |
 | *share_fields*         | bool         | no       | True    |
 
 - *allow_extra*: If true, the presence of additional (unmatched) series will not be treated as an issue with the data.
@@ -159,7 +159,8 @@ The following table summarises these keys.
 There are number of ways to ensure the complete data set for each series was sent, however the approach varies
 depending on the type of data (classic, enhanced, MOSAIC etc).
 
-For classic DICOM data with one slice per file, specifying the number of slices is sufficient.\
+For classic DICOM data with one slice per file, specifying the number of slices (using "num_files") is sufficient.
+A range can also be set in the template if the number of slices can vary.\
 For data stored in MOSAIC format, the number of slices in conjunction with the series level *field* entry "NumberofImagesInMosaic" can be utilised.\
 When checking enhanced DICOMS, the "NumberOfFrames" *field* should be used.
 
