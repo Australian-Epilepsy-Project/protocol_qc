@@ -12,8 +12,8 @@
     },
     "tags": {
       "protocol_version": {
-      "type": "constant",
-      "tag": "v42"
+        "type": "constant",
+        "tag": "v42"
       },
       "scanner_type": {
         "type": "constant",
@@ -142,6 +142,7 @@
             "value": 84,
             "comparison": "exact"
           }
+        }
       },
       "phase": {
         "num_files": 42,
@@ -157,7 +158,8 @@
           "NumberOfImagesInMosaic": {
             "value": 84,
             "comparison": "exact"
-          },
+          }
+        }
       },
       "PhysioLog": {
         "num_files": 1,
@@ -201,7 +203,7 @@
       "Columns": {
         "value": 72,
         "comparison": "exact"
-      },
+      }
     },
     "series": {
       "SBref_mag": {
