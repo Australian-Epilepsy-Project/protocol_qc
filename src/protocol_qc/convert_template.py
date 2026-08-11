@@ -229,6 +229,15 @@ def _convert_node(node: Any) -> Any:
             result[key] = _convert_tags_block(value)
         elif key == "fields" and isinstance(value, dict):
             result[key] = _convert_fields_block(value)
+        elif key == "num_files" and isinstance(value, dict):
+            if "min" in value and "max" in value:
+                result[key] = [value["min"], value["max"]]
+            else:
+                raise ValueError(
+                    "'min' and/or 'max' keys missing from 'num_files' dictionary. "
+                    "Unclear how to convert. Please ensure both bounds are set in "
+                    "original templates before trying to convert."
+                )
         elif isinstance(value, dict):
             result[key] = _convert_node(value)
         elif isinstance(value, list):

@@ -332,13 +332,13 @@ class TemplateSeries:
             Is the series complete?
         """
 
-        num_files: tuple[int, ...] | int | None
+        num_files: tuple[int, int] | int | None
         if num_files := getattr(self, "num_files"):
             if isinstance(num_files, tuple):
                 if not (
-                    len(num_files) == 2 \
-                    and isinstance(num_files[0], int) \
-                    and isinstance(num_files[1], int) \
+                    len(num_files) == 2
+                    and isinstance(num_files[0], int)
+                    and isinstance(num_files[1], int)
                 ):
                     raise TypeError(
                         "Malformed template:"
@@ -351,6 +351,7 @@ class TemplateSeries:
                 self.logger.error(
                     f"   files: {scan.num_files} not between {list(num_files)}"
                 )
+                return False
             if not isinstance(num_files, int):
                 raise TypeError(
                     "Malformed template:"
