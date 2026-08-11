@@ -66,23 +66,31 @@ def gen_custom_tags(
                 tags_output["custom_tags"][tag_type] = "NOT FOUND"
         elif isinstance(value["tag"], dict):
             for tag, to_check in value["tag"].items():
-                if "PRIVATE-" in to_check["field"]:
+                field_name: str = to_check["field"]
+                if "PRIVATE-" in field_name:
                     raise KeyError(
                         "Cannot use private DICOM fields when generating tags"
                     )
+                comparison_items = {k: v for k, v in to_check.items() if k != "field"}
+                if len(comparison_items) != 1:
+                    raise KeyError(
+                        f"Malformed template: tag \"{tag_type}\" option \"{tag}\""
+                        " must have exactly one comparison key besides \"field\""
+                    )
+                comparison_name, reference = next(iter(comparison_items.items()))
                 try:
-                    if attr := getattr(data_series.data, to_check["field"]):
-                        if to_check["comparison"] == "exact":
-                            if attr == to_check["value"]:
+                    if attr := getattr(data_series.data, field_name):
+                        if comparison_name == "exactly":
+                            if attr == reference:
                                 break
-                        elif to_check["comparison"] == "in_set":
-                            if attr in to_check["value"]:
+                        elif comparison_name == "in_set":
+                            if attr in reference:
                                 break
-                        elif to_check["comparison"] == "regex":
-                            if re.search(to_check["value"], attr):
+                        elif comparison_name == "regex":
+                            if re.search(reference, attr):
                                 break
-                        elif to_check["comparison"] == "in_range":
-                            if to_check["value"][0] <= float(attr) <= to_check["value"]:
+                        elif comparison_name == "in_range":
+                            if reference[0] <= float(attr) <= reference[1]:
                                 break
                 except AttributeError:
                     pass

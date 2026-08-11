@@ -203,26 +203,17 @@ Here is the corresponding section of the original template
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
-      "SeriesDescription": {
-        "value": "^t2s_megre.*",
-        "comparison": "regex"
-      }
+      "SeriesDescription": { "regex": "^t2s_megre.*" }
     },
     "series": {
       "Images": {
         "fields": {
-          "SeriesDescription": {
-            "value": "t2s_megre",
-            "comparison": "exact"
-          }
+          "SeriesDescription": { "exactly": "t2s_megre" }
         }
       },
       "R2* map": {
         "fields": {
-          "SeriesDescription": {
-            "value": ".*_R2Star_Images$",
-            "comparison": "regex"
-          }
+          "SeriesDescription": { "regex": ".*_R2Star_Images$" }
         }
       }
     }
@@ -236,87 +227,32 @@ And here is the corresponding section of the revised protocol
   },
   "T2*-weighted multi-echo gradient echo": {
     "fields": {
-      "Modality": {
-        "value": "MR",
-        "comparison": "exact"
-      },
-      "ScanningSequence": {
-        "value": "GR",
-        "comparison": "exact"
-      },
-      "SequenceVariant": {
-        "value": [
-          "SP",
-          "OSP"
-        ],
-        "comparison": "exact"
-      },
-      "ScanOptions": {
-        "value": "",
-        "comparison": "exact"
-      },
-      "MRAcquisitionType": {
-        "value": "3D",
-        "comparison": "exact"
-      },
-      "SequenceName": {
-        "value": "^\\*fl3d\\d+r",
-        "comparison": "regex"
-      }
+      "Modality": { "exactly": "MR" },
+      "ScanningSequence": { "exactly": "GR" },
+      "SequenceVariant": { "exactly": [ "SP", "OSP" ] },
+      "ScanOptions": { "exactly": "" },
+      "MRAcquisitionType": { "exactly": "3D" },
+      "SequenceName": { "regex": "^\\*fl3d\\d+r" },
     },
     "series": {
       "Magnitude (original)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND" ] }
         }
       },
       "Magnitude (normalised)": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "M",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "M", "ND", "NORM" ] }
         }
       },
       "Phase": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "ORIGINAL",
-              "PRIMARY",
-              "P",
-              "ND"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "ORIGINAL", "PRIMARY", "P", "ND" ] }
         }
       },
       "R2* map": {
         "fields": {
-          "ImageType": {
-            "value": [
-              "DERIVED",
-              "PRIMARY",
-              "R2_STAR MAP",
-              "ND",
-              "NORM"
-            ],
-            "comparison": "exact"
-          }
+          "ImageType": { "exactly": [ "DERIVED", "PRIMARY", "R2_STAR MAP", "ND", "NORM" ] }
         }
       }
     }
